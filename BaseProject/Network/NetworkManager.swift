@@ -62,9 +62,13 @@ class NetworkManager {
     }
     
     @discardableResult
-    func request(with session: URLSession, _ request: URLRequest, _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
+    func request(
+        with session: URLSession,
+        _ request: URLRequest,
+        _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
+        
         let task = session.dataTask(with: request) {
-            (responseData, response, responseError) in
+            responseData, response, responseError in
             
             guard responseError == nil else {
                 handler(.failure(.response(error: responseError)))

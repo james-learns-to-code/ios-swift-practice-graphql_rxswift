@@ -19,7 +19,8 @@ final class GitHubNetworkManager: NetworkManager {
     ]
     
     private static var access_token: String {
-        guard let token = String.getPureStringFromBundleResource("GitHubAccessToken", ofType: "credential") else {
+        guard let token = String
+            .getPureStringFromBundleResource("GitHubAccessToken", ofType: "credential") else {
             assertionFailure("You need to create 'GitHubAccessToken.credential' file contains token for accessing GitHub API")
             return ""
         }

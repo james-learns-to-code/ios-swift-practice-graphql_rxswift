@@ -11,8 +11,8 @@ import Foundation
 extension String {
     static func getPureStringFromBundleResource(_ resource: String, ofType: String) -> String? {
         guard
-            let filepath = Bundle.main.path(forResource: resource, ofType: ofType),
-            let token = try? String(contentsOfFile: filepath, encoding: .utf8)
+            let filePath = Bundle.main.path(forResource: resource, ofType: ofType),
+            let token = try? String(contentsOfFile: filePath, encoding: .utf8)
             else { return nil }
         return token.filter { !$0.isNewline && !$0.isWhitespace }
     }

@@ -51,7 +51,6 @@ final class GitHubUserCell: UITableViewCell {
             make.width.height.equalTo(60)
             make.leading.top.equalTo(self).inset(10)
         }
-        
         addSubview(idLabel)
         idLabel.snp.makeConstraints { make in
             make.height.equalTo(30)
@@ -59,7 +58,6 @@ final class GitHubUserCell: UITableViewCell {
             make.top.equalTo(self).inset(10)
             make.trailing.equalTo(self).inset(10)
         }
-        
         addSubview(repoDescriptionLabel)
         repoDescriptionLabel.snp.makeConstraints { make in
             make.height.equalTo(30)

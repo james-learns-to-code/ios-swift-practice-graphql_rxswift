@@ -29,14 +29,10 @@ final class ViewModel {
     // MARK: Pagination
     
     private var pageInfo: GitHubPageInfoModel?
-    private var endCursor: String? {
-        return pageInfo?.endCursor
-    }
     
     // MARK: API
     private var dataTask: URLSessionDataTask?
     func searchGithubUserIfCan(by name: String?, isPagination: Bool = false) {
-        print("searchGithubUserIfCan")
         if isPagination {
             if let hasNextPage = pageInfo?.hasNextPage, hasNextPage == false {
                 return
@@ -50,9 +46,10 @@ final class ViewModel {
         }
         searchGithubUser(by: name, isPagination: isPagination)
     }
+    
     private func searchGithubUser(by name: String, isPagination: Bool) {
         dataTask = GitHubNetworkManager.shared
-            .requestUserListByName(name, cursor: endCursor) { [weak self] result in
+            .requestUserListByName(name, cursor: pageInfo?.endCursor) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let value):
