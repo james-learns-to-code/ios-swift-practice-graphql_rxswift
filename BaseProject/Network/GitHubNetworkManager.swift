@@ -13,16 +13,16 @@ final class GitHubNetworkManager: NetworkManager {
     
     static let url = URL(string: "https://api.github.com/graphql")
 
-    static let githubHeader: [String: String] = [
+    private static let githubHeader: [String: String] = [
         "Content-Type": "application/json",
         "Authorization": "token " + access_token
     ]
     
-    static var access_token: String {
-        if let filepath = Bundle.main.path(forResource: "GitHubAccessToken", ofType: "credential") {
-            if let token = try? String(contentsOfFile: filepath, encoding: .utf8) {
-                return token.filter { !$0.isNewline && !$0.isWhitespace }
-            }
+    private static var access_token: String {
+        if
+            let filepath = Bundle.main.path(forResource: "GitHubAccessToken", ofType: "credential"),
+            let token = try? String(contentsOfFile: filepath, encoding: .utf8) {
+            return token.filter { !$0.isNewline && !$0.isWhitespace }
         }
         assertionFailure("You need to create 'GitHubAccessToken.credential' file contains token for accessing GitHub API")
         return ""
@@ -33,7 +33,7 @@ final class GitHubNetworkManager: NetworkManager {
 extension GitHubNetworkManager {
     func requestUserListByName(
         _ name: String,
-        handler: @escaping (Result<GraphQLSearchResultResponseModel, Error>) -> Void) {
+        handler: @escaping (Result<GitHubSearchResultResponseModel, Error>) -> Void) {
        
         let body =
         """
@@ -74,45 +74,9 @@ extension GitHubNetworkManager {
         query: body,
         type: .post,
         header: GitHubNetworkManager.githubHeader) { result in
-            ResultType<GraphQLSearchResultResponseModel>
-                .handle(result, handler: handler)
+            ResultType<GitHubSearchResultResponseModel>
+                .handleResult(result, handler: handler)
         }
     }
 }
 
-class GraphQLResponseErrorModel: Codable {
-    var message: String?
-}
-
-class GraphQLSearchResultResponseModel: Codable {
-    var data: GraphQLSearchResultModel?
-    var errors: GraphQLResponseErrorModel?
-}
-
-class GraphQLSearchResultModel: Codable {
-    var search: GraphQLSearchNodesModel?
-}
-
-class GraphQLSearchNodesModel: Codable {
-    var nodes: [GraphQLSearchNodeModel]?
-    var pageInfo: GraphQLPageInfoModel?
-}
-
-class GraphQLSearchNodeModel: Codable {
-    var __typename: String?
-    var name: String?
-    var login: String?
-    var avatarUrl: String?
-    var url: String?
-    var bio: String?
-    var repository: GraphQLRepositoryMetaModel?
-}
-
-class GraphQLRepositoryMetaModel: Codable {
-    var totalCount: Int?
-}
-
-class GraphQLPageInfoModel: Codable {
-    var endCursor: String?
-    var hasNextPage: Bool?
-}

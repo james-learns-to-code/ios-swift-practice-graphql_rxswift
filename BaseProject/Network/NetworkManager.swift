@@ -98,16 +98,16 @@ class NetworkManager {
  
     // MARK: Handler
     struct ResultType<Type: Decodable> {
-        static func handle(
+        static func handleResult(
             _ result: DataResult,
             handler: @escaping (Result<Type, Error>) -> Void) {
             
             switch result {
-            case .success(let value):
+            case .success(let data):
                 do {
                     let decoder = JSONDecoder()
-                    let model = try decoder.decode(Type.self, from: value)
-                    handler(.success(model))
+                    let value = try decoder.decode(Type.self, from: data)
+                    handler(.success(value))
                 } catch {
                     handler(.failure(NetworkError.jsonEncoding(error: error).value))
                 }
