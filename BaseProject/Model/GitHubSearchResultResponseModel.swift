@@ -22,11 +22,11 @@ struct GitHubSearchResultModel: Codable {
 }
 
 struct GitHubSearchNodesModel: Codable {
-    var nodes: [GitHubSearchNodeModel]?
+    var nodes: [GitHubSearchUserModel]?
     var pageInfo: GitHubPageInfoModel?
 }
 
-struct GitHubSearchNodeModel: Codable {
+struct GitHubSearchUserModel: Codable {
     var __typename: String?
     var name: String?
     var login: String?

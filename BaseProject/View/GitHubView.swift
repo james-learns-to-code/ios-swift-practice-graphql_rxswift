@@ -1,18 +1,18 @@
 //
-//  StarwarsView.swift
+//  GitHubView.swift
 //  BaseProject
 //
-//  Created by leedongseok on 14/06/2019.
+//  Created by leedongseok on 18/07/2019.
 //  Copyright © 2019 Good Effect. All rights reserved.
 //
 
 import UIKit
 
-final class StarwarsView: UIView {
+final class GitHubView: UIView {
     
     lazy private var tableView: UITableView = {
         let view = UITableView()
-        view.register(StarwarsFilmCell.self, forCellReuseIdentifier: "StarwarsFilmCell")
+        view.register(GitHubUserCell.self, forCellReuseIdentifier: "GitHubUserCell")
         return view
     }()
     

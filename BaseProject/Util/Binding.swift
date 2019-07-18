@@ -12,6 +12,10 @@ final class Binding<T> {
     
     private var listner: ((T?) -> Void)?
 
+    init(value: T) {
+        self.value = value
+    }
+
     var value: T? {
         didSet { listner?(value) }
     }

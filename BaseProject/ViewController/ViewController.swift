@@ -1,20 +1,21 @@
 //
-//  StarwarsViewController.swift
+//  ViewController.swift
 //  BaseProject
 //
-//  Created by leedongseok on 14/06/2019.
+//  Created by leedongseok on 12/06/2019.
 //  Copyright © 2019 Good Effect. All rights reserved.
 //
 
 import UIKit
+import SwiftUtilityKit
 
-final class StarwarsViewController: UIViewController {
-    private let viewModel = StarwarsViewModel()
+final class ViewController: UIViewController {
+    private let viewModel = ViewModel()
     
     // MARK: View switching
     
-    private lazy var customView: StarwarsView = {
-        let view = StarwarsView(delegate: self, dataSource: self)
+    private lazy var customView: GitHubView = {
+        let view = GitHubView(delegate: self, dataSource: self)
         return view
     }()
     
@@ -27,7 +28,7 @@ final class StarwarsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        viewModel.fetchApiList()
+        viewModel.fetchUserList()
     }
     
     // MARK: Setup
@@ -37,7 +38,7 @@ final class StarwarsViewController: UIViewController {
     }
     
     private func setupBinding() {
-        viewModel.films.bind() { [weak self] films in
+        viewModel.users.bind() { [weak self] users in
             DispatchQueue.main.async {
                 self?.customView.reload()
             }
@@ -45,18 +46,18 @@ final class StarwarsViewController: UIViewController {
     }
 }
 
-extension StarwarsViewController: UITableViewDelegate {
+extension ViewController: UITableViewDelegate {
 }
 
-extension StarwarsViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StarwarsFilmCell", for: indexPath) as! StarwarsFilmCell
-        let film = viewModel.film(at: indexPath)
-        cell.configure(film: film)
+        let cell = GitHubUserCell.dequeue(from: tableView, for: indexPath)!
+        let user = viewModel.user(at: indexPath)
+        cell.configure(user: user)
         return cell
     }
 }
