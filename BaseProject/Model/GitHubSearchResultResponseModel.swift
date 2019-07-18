@@ -10,7 +10,7 @@ import Foundation
 
 struct GitHubSearchResultResponseModel: Codable {
     var data: GitHubSearchResultModel?
-    var errors: GitHubResponseErrorModel?
+    var errors: [GitHubResponseErrorModel]?
 }
 
 struct GitHubResponseErrorModel: Codable {
@@ -27,16 +27,12 @@ struct GitHubSearchNodesModel: Codable {
 }
 
 struct GitHubSearchUserModel: Codable {
-    var __typename: String?
-    var name: String?
     var login: String?
     var avatarUrl: String?
-    var url: String?
-    var bio: String?
-    var repository: GitHubRepositoryMetaModel?
+    var repositories: GitHubRepositoriesModel?
 }
 
-struct GitHubRepositoryMetaModel: Codable {
+struct GitHubRepositoriesModel: Codable {
     var totalCount: Int?
 }
 

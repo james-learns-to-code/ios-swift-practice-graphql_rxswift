@@ -7,20 +7,30 @@
 //
 
 import UIKit
+import SnapKit
+import SwiftUtilityKit
 
 final class GitHubView: UIView {
     
-    lazy private var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let view = UITableView()
-        view.register(GitHubUserCell.self, forCellReuseIdentifier: "GitHubUserCell")
+        view.register(GitHubUserCell.self)
+        view.rowHeight = GitHubUserCell.height
+        view.contentInset.bottom = CGFloat(ViewModel.bottomInset)
         return view
     }()
     
-    required init(delegate: UITableViewDelegate, dataSource: UITableViewDataSource) {
+    lazy var searchController: UISearchController = {
+        let ctr = UISearchController(searchResultsController: nil)
+        ctr.hidesNavigationBarDuringPresentation = false
+        ctr.dimsBackgroundDuringPresentation = false
+        ctr.searchBar.showsCancelButton = false
+        return ctr
+    }()
+    
+    required init() {
         super.init(frame: .zero)
         setup()
-        tableView.delegate = delegate
-        tableView.dataSource = dataSource
     }
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented")
@@ -32,21 +42,14 @@ final class GitHubView: UIView {
     // MARK: Setup
     
     private func setup() {
-        backgroundColor = .red
-        addTableView()
-    }
-    private func addTableView() {
-        addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.heightAnchor.constraint(equalTo: heightAnchor),
-            tableView.widthAnchor.constraint(equalTo: widthAnchor),
-            tableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            tableView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            ])
+        setupViews()
     }
     
-    func reload() {
-        tableView.reloadData()
+    private func setupViews() {
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalTo(self)
+        }
+        tableView.tableHeaderView = searchController.searchBar
     }
 }

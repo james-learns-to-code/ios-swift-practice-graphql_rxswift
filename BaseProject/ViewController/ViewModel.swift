@@ -7,32 +7,69 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class ViewModel {
     
-    var users = Binding<[GitHubSearchUserModel]>(value: [GitHubSearchUserModel]())
-    
-    func user(at indexPath: IndexPath) -> GitHubSearchUserModel? {
-        return users.value?[safe: indexPath.row]
+    let users: BehaviorRelay<[GitHubSearchUserModel]> = BehaviorRelay(value: [])
+    let searchText: BehaviorRelay<String> = BehaviorRelay(value: "")
+
+    // MARK: Interface
+
+    func resetData() {
+        users.accept([])
+        pageInfo = nil
     }
     
-    func numberOfRowsInSection(_ section: Int) -> Int {
-        return users.value?.count ?? 0
+    func cancelRequest() {
+        dataTask?.cancel()
     }
-     
+    
+    // MARK: Pagination
+    
+    private var pageInfo: GitHubPageInfoModel?
+    private var endCursor: String? {
+        return pageInfo?.endCursor
+    }
+    
     // MARK: API
-    func fetchUserList() {
-        let name = "james"
-        GitHubNetworkManager.shared.requestUserListByName(name) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let value):
-                guard let users = value.data?.search?.nodes else { return }
-                self.users.value?.append(contentsOf: users)
-            case .failure(let error):
-                print(error)
+    private var dataTask: URLSessionDataTask?
+    func searchGithubUserIfCan(by name: String?, isPagination: Bool = false) {
+        print("searchGithubUserIfCan")
+        if isPagination {
+            if let hasNextPage = pageInfo?.hasNextPage, hasNextPage == false {
+                return
             }
+        } else {
+            pageInfo = nil
+        }
+        guard let name = name, name.count > 0 else {
+            resetData()
+            return
+        }
+        searchGithubUser(by: name, isPagination: isPagination)
+    }
+    private func searchGithubUser(by name: String, isPagination: Bool) {
+        dataTask = GitHubNetworkManager.shared
+            .requestUserListByName(name, cursor: endCursor) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let value):
+                    self.pageInfo = value.data?.search?.pageInfo
+                    guard var users = value.data?.search?.nodes else { return }
+                    if isPagination {
+                        users = self.users.value + users
+                    }
+                    self.users.accept(users)
+                case .failure(let error):
+                    print(error)
+                }
         }
     }
+    
+    static let title = "Github Repos"
+    static let bottomInset = 100
 }
+
 
