@@ -9,6 +9,10 @@ inhibit_all_warnings!
 
 def common_pods
   pod 'SwiftUtilityKit', '0.1.1'
+  pod 'Kingfisher', '5.7.0'
+  pod 'SnapKit', '5.0.0'
+  pod 'RxSwift', '5.0.0'
+  pod 'RxCocoa', '5.0.0'
 end
 
 def common_pods_for_test

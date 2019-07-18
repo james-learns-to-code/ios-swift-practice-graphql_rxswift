@@ -17,19 +17,18 @@
 		1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */; };
 		1C2E837322E019E80045313C /* GitHubAccessToken.credential in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E837222E019E70045313C /* GitHubAccessToken.credential */; };
 		1C2E837622E01D230045313C /* GitHubSearchResultResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E837522E01D230045313C /* GitHubSearchResultResponseModel.swift */; };
-		1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */; };
-		1CC76F2922B3D3E600D39971 /* StarwarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2822B3D3E600D39971 /* StarwarsView.swift */; };
-		1CC76F2C22B3D43D00D39971 /* StarwarsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */; };
-		1CC76F2E22B3D50200D39971 /* StarwarsFilmsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2D22B3D50200D39971 /* StarwarsFilmsModel.swift */; };
+		1C2E837A22E022CB0045313C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E837922E022CB0045313C /* ViewModel.swift */; };
+		1C2E837C22E0230F0045313C /* GitHubUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E837B22E0230F0045313C /* GitHubUserCell.swift */; };
+		1C2E837E22E0295A0045313C /* GitHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E837D22E0295A0045313C /* GitHubView.swift */; };
+		1C2F057E22E09930007B059E /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F057D22E09930007B059E /* UITableViewExtension.swift */; };
+		1C2F058022E0D1D2007B059E /* UIImageView+KingfisherExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F057F22E0D1D2007B059E /* UIImageView+KingfisherExtension.swift */; };
+		1C2F058222E0E864007B059E /* GitHubNetworkManager_SearchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F058122E0E864007B059E /* GitHubNetworkManager_SearchUser.swift */; };
+		1C2F058422E0E8C3007B059E /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F058322E0E8C3007B059E /* StringExtension.swift */; };
+		1C2F058622E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F058522E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift */; };
 		77E51B4336D2E2AB14E53FA7 /* Pods_BaseProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C72B98D968C2E5264CC41B6 /* Pods_BaseProject.framework */; };
-		94195F2D22B4AD4D001B788B /* StarwarsViewControllerWithXib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94195F2C22B4AD4C001B788B /* StarwarsViewControllerWithXib.swift */; };
-		94195F2F22B4AD74001B788B /* StarwarsViewControllerWithXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94195F2E22B4AD74001B788B /* StarwarsViewControllerWithXib.xib */; };
 		9437FB3B22B40AFD00CE74C5 /* NetworkResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB3A22B40AFD00CE74C5 /* NetworkResponseTests.swift */; };
 		9437FB3F22B4175D00CE74C5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB3E22B4175D00CE74C5 /* Binding.swift */; };
-		9437FB4222B4191200CE74C5 /* StarwarsFilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB4122B4191200CE74C5 /* StarwarsFilmCell.swift */; };
 		9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB4322B422AF00CE74C5 /* NetworkManager.swift */; };
-		9437FB4622B4230000CE74C5 /* StarwarsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB4522B4230000CE74C5 /* StarwarsViewModel.swift */; };
-		9437FB4922B425A800CE74C5 /* StarwarsViewControllerWithView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB4822B425A800CE74C5 /* StarwarsViewControllerWithView.swift */; };
 		BFC9E84AFF25960F5EDF9FB1 /* libPods-BaseProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1A6A20967138EEC099ACBE /* libPods-BaseProjectUITests.a */; };
 		CA0DEAF95BDD75AD4ACEA4D6 /* libPods-BaseProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A22E9ADBC8272E23CA3965D /* libPods-BaseProjectTests.a */; };
 /* End PBXBuildFile section */
@@ -72,10 +71,14 @@
 		1C2E837522E01D230045313C /* GitHubSearchResultResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResultResponseModel.swift; sourceTree = "<group>"; };
 		1C2E837722E020530045313C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		1C2E837822E020530045313C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewController.swift; sourceTree = "<group>"; };
-		1CC76F2822B3D3E600D39971 /* StarwarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsView.swift; sourceTree = "<group>"; };
-		1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsNetworkManager.swift; sourceTree = "<group>"; };
-		1CC76F2D22B3D50200D39971 /* StarwarsFilmsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsFilmsModel.swift; sourceTree = "<group>"; };
+		1C2E837922E022CB0045313C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1C2E837B22E0230F0045313C /* GitHubUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserCell.swift; sourceTree = "<group>"; };
+		1C2E837D22E0295A0045313C /* GitHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubView.swift; sourceTree = "<group>"; };
+		1C2F057D22E09930007B059E /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		1C2F057F22E0D1D2007B059E /* UIImageView+KingfisherExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+KingfisherExtension.swift"; sourceTree = "<group>"; };
+		1C2F058122E0E864007B059E /* GitHubNetworkManager_SearchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager_SearchUser.swift; sourceTree = "<group>"; };
+		1C2F058322E0E8C3007B059E /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		1C2F058522E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManagerQueryReplacer.swift; sourceTree = "<group>"; };
 		23C1E9C36FF6A75FAA492A1F /* Pods-BaseProjectUITests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectUITests.analyze.xcconfig"; path = "Target Support Files/Pods-BaseProjectUITests/Pods-BaseProjectUITests.analyze.xcconfig"; sourceTree = "<group>"; };
 		3C983293F9A6E001BF2800C7 /* Pods-BaseProjectTests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectTests.analyze.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProjectTests/Pods-BaseProjectTests.analyze.xcconfig"; sourceTree = "<group>"; };
 		3F3709EBF08AF81A3E0A3C76 /* Pods-BaseProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-BaseProjectTests/Pods-BaseProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,14 +89,9 @@
 		7A22E9ADBC8272E23CA3965D /* libPods-BaseProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BaseProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DF7349B5DAC0BD306BE4B31 /* Pods-BaseProjectTests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectTests.analyze.xcconfig"; path = "Target Support Files/Pods-BaseProjectTests/Pods-BaseProjectTests.analyze.xcconfig"; sourceTree = "<group>"; };
 		8C72B98D968C2E5264CC41B6 /* Pods_BaseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		94195F2C22B4AD4C001B788B /* StarwarsViewControllerWithXib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewControllerWithXib.swift; sourceTree = "<group>"; };
-		94195F2E22B4AD74001B788B /* StarwarsViewControllerWithXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StarwarsViewControllerWithXib.xib; sourceTree = "<group>"; };
 		9437FB3A22B40AFD00CE74C5 /* NetworkResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseTests.swift; sourceTree = "<group>"; };
 		9437FB3E22B4175D00CE74C5 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
-		9437FB4122B4191200CE74C5 /* StarwarsFilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsFilmCell.swift; sourceTree = "<group>"; };
 		9437FB4322B422AF00CE74C5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		9437FB4522B4230000CE74C5 /* StarwarsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewModel.swift; sourceTree = "<group>"; };
-		9437FB4822B425A800CE74C5 /* StarwarsViewControllerWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewControllerWithView.swift; sourceTree = "<group>"; };
 		A11D15BCF582F81A05CB3B74 /* Pods-BaseProjectUITests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectUITests.analyze.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProjectUITests/Pods-BaseProjectUITests.analyze.xcconfig"; sourceTree = "<group>"; };
 		AEA51FE4FB1D9C1D24F32736 /* Pods-BaseProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BaseProjectUITests/Pods-BaseProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B3275777882F1CFB2E3DB3C8 /* Pods-BaseProject.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProject.analyze.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProject/Pods-BaseProject.analyze.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				9437FB4022B418F100CE74C5 /* Cell */,
 				1CC76F2322B3D2DB00D39971 /* ViewController */,
 				1C1209AF22B0DE99005D0972 /* AppDelegate.swift */,
-				1C1209B122B0DE99005D0972 /* ViewController.swift */,
 				1C1209B322B0DE99005D0972 /* Main.storyboard */,
 				1C2E837422E01C040045313C /* Resource */,
 				1C1209BB22B0DE99005D0972 /* Info.plist */,
@@ -211,11 +208,8 @@
 		1CC76F2322B3D2DB00D39971 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				94195F2E22B4AD74001B788B /* StarwarsViewControllerWithXib.xib */,
-				94195F2C22B4AD4C001B788B /* StarwarsViewControllerWithXib.swift */,
-				9437FB4822B425A800CE74C5 /* StarwarsViewControllerWithView.swift */,
-				1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */,
-				9437FB4522B4230000CE74C5 /* StarwarsViewModel.swift */,
+				1C1209B122B0DE99005D0972 /* ViewController.swift */,
+				1C2E837922E022CB0045313C /* ViewModel.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -223,7 +217,7 @@
 		1CC76F2422B3D2FC00D39971 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1CC76F2822B3D3E600D39971 /* StarwarsView.swift */,
+				1C2E837D22E0295A0045313C /* GitHubView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,7 +225,6 @@
 		1CC76F2522B3D35300D39971 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1CC76F2D22B3D50200D39971 /* StarwarsFilmsModel.swift */,
 				1C2E837522E01D230045313C /* GitHubSearchResultResponseModel.swift */,
 			);
 			path = Model;
@@ -241,8 +234,9 @@
 			isa = PBXGroup;
 			children = (
 				9437FB4322B422AF00CE74C5 /* NetworkManager.swift */,
-				1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */,
 				1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */,
+				1C2F058522E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift */,
+				1C2F058122E0E864007B059E /* GitHubNetworkManager_SearchUser.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -277,6 +271,9 @@
 			isa = PBXGroup;
 			children = (
 				9437FB3E22B4175D00CE74C5 /* Binding.swift */,
+				1C2F057D22E09930007B059E /* UITableViewExtension.swift */,
+				1C2F057F22E0D1D2007B059E /* UIImageView+KingfisherExtension.swift */,
+				1C2F058322E0E8C3007B059E /* StringExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -284,7 +281,7 @@
 		9437FB4022B418F100CE74C5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9437FB4122B4191200CE74C5 /* StarwarsFilmCell.swift */,
+				1C2E837B22E0230F0045313C /* GitHubUserCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -425,7 +422,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C1209BA22B0DE99005D0972 /* LaunchScreen.storyboard in Resources */,
-				94195F2F22B4AD74001B788B /* StarwarsViewControllerWithXib.xib in Resources */,
 				1C1209B722B0DE99005D0972 /* Assets.xcassets in Resources */,
 				1C1209B522B0DE99005D0972 /* Main.storyboard in Resources */,
 				1C2E837322E019E80045313C /* GitHubAccessToken.credential in Resources */,
@@ -555,20 +551,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C2F058222E0E864007B059E /* GitHubNetworkManager_SearchUser.swift in Sources */,
+				1C2E837A22E022CB0045313C /* ViewModel.swift in Sources */,
+				1C2F057E22E09930007B059E /* UITableViewExtension.swift in Sources */,
 				9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */,
-				1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */,
 				1C2E837622E01D230045313C /* GitHubSearchResultResponseModel.swift in Sources */,
-				9437FB4222B4191200CE74C5 /* StarwarsFilmCell.swift in Sources */,
+				1C2F058022E0D1D2007B059E /* UIImageView+KingfisherExtension.swift in Sources */,
+				1C2E837E22E0295A0045313C /* GitHubView.swift in Sources */,
 				1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */,
-				94195F2D22B4AD4D001B788B /* StarwarsViewControllerWithXib.swift in Sources */,
-				1CC76F2C22B3D43D00D39971 /* StarwarsNetworkManager.swift in Sources */,
+				1C2F058622E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift in Sources */,
 				1C1209B222B0DE99005D0972 /* ViewController.swift in Sources */,
 				9437FB3F22B4175D00CE74C5 /* Binding.swift in Sources */,
 				1C1209B022B0DE99005D0972 /* AppDelegate.swift in Sources */,
-				9437FB4622B4230000CE74C5 /* StarwarsViewModel.swift in Sources */,
-				1CC76F2922B3D3E600D39971 /* StarwarsView.swift in Sources */,
-				9437FB4922B425A800CE74C5 /* StarwarsViewControllerWithView.swift in Sources */,
-				1CC76F2E22B3D50200D39971 /* StarwarsFilmsModel.swift in Sources */,
+				1C2F058422E0E8C3007B059E /* StringExtension.swift in Sources */,
+				1C2E837C22E0230F0045313C /* GitHubUserCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
