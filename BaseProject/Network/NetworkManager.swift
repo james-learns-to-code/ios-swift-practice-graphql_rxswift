@@ -14,93 +14,81 @@ enum NetworkError: Error {
     case data
     case jsonEncoding(error: Error?)
     case query
-    
-    var code: Int {
-        switch self {
-        case .url: return 1
-        case .response: return 2
-        case .data: return 3
-        case .jsonEncoding: return 4
-        case .query: return 5
-        }
-    }
-    
-    var value: NSError {
-        var userInfo = [String: Any]()
-        if case .response(let error) = self {
-            userInfo["error"] = error
-        }
-        return NSError(domain: NetworkError.domain, code: self.code, userInfo: userInfo)
-    }
-    
+    case githubApi(errors: [GitHubResponseErrorModel]?)
+ 
     static let domain = "app.network"
 }
 
 class NetworkManager {
     
-    static let header: [String: String] = [
+    static let defaultHeader: [String: String] = [
         "Content-Type": "application/json"
     ]
     
     // MARK: Request
     
-    enum RequestType {
-        case post
-        case get
+    enum RequestType: String {
+        case post = "POST"
+        case get = "GET"
         
         var httpMethod: String {
-            switch self {
-            case .post: return "POST"
-            case .get: return "GET"
-            }
+            return self.rawValue
         }
     }
     
-    typealias DataResult = Result<Data, Error>
+    typealias DataResult = Result<Data, NetworkError>
     typealias DataResultHandler = (DataResult) -> Void
     
+    @discardableResult
     func request(
-        with url: URL?,
-        query: String? = nil,
+        with url: URL,
         type: RequestType,
-        header: [String: String] = NetworkManager.header,
-        handler: @escaping DataResultHandler) {
+        header: [String: String] = NetworkManager.defaultHeader,
+        body: String? = nil,
+        handler: @escaping DataResultHandler) -> URLSessionDataTask {
         
-        guard let url = url else {
-            handler(.failure(NetworkError.url.value))
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = type.httpMethod
-        request.allHTTPHeaderFields = header
+        var req = URLRequest(url: url)
+        req.httpMethod = type.httpMethod
+        req.allHTTPHeaderFields = header
         
-        if let query = query {
-            request.httpBody = query.data(using: .utf8)
+        if let body = body {
+            req.httpBody = body.data(using: .utf8)
         }
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
+        
+        return request(with: session, req, handler)
+    }
+    
+    @discardableResult
+    func request(
+        with session: URLSession,
+        _ request: URLRequest,
+        _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
+        
         let task = session.dataTask(with: request) {
-            (responseData, response, responseError) in
+            responseData, response, responseError in
             
             guard responseError == nil else {
-                handler(.failure(NetworkError.response(error: responseError).value))
+                handler(.failure(.response(error: responseError)))
                 return
             }
             guard let data = responseData else {
-                handler(.failure(NetworkError.data.value))
+                handler(.failure(.data))
                 return
             }
             handler(.success(data))
         }
         task.resume()
+        return task
     }
  
     // MARK: Handler
     struct ResultType<Type: Decodable> {
         static func handleResult(
             _ result: DataResult,
-            handler: @escaping (Result<Type, Error>) -> Void) {
+            handler: @escaping (Result<Type, NetworkError>) -> Void) {
             
             switch result {
             case .success(let data):
@@ -109,22 +97,12 @@ class NetworkManager {
                     let value = try decoder.decode(Type.self, from: data)
                     handler(.success(value))
                 } catch {
-                    handler(.failure(NetworkError.jsonEncoding(error: error).value))
+                    handler(.failure(.jsonEncoding(error: error)))
                 }
             case .failure(let error):
+                print(error)
                 handler(.failure(error))
             }
         }
     }
-}
-
-// MARK: Interface
-extension NetworkManager {
-    func request(
-        with urlString: String,
-        type: RequestType,
-        handler: @escaping DataResultHandler) {
-        let url = URL(string: urlString)
-        request(with: url, type: type, handler: handler)
-    } 
 }
