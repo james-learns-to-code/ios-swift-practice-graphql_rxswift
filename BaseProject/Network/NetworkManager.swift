@@ -12,7 +12,8 @@ enum NetworkError: Error {
     case url
     case response(error: Error?)
     case data
-    case jsonEncoding
+    case jsonEncoding(error: Error?)
+    case query
     
     var code: Int {
         switch self {
@@ -20,6 +21,7 @@ enum NetworkError: Error {
         case .response: return 2
         case .data: return 3
         case .jsonEncoding: return 4
+        case .query: return 5
         }
     }
     
@@ -59,7 +61,9 @@ class NetworkManager {
     
     func request(
         with url: URL?,
+        query: String? = nil,
         type: RequestType,
+        header: [String: String] = NetworkManager.header,
         handler: @escaping DataResultHandler) {
         
         guard let url = url else {
@@ -68,7 +72,11 @@ class NetworkManager {
         }
         var request = URLRequest(url: url)
         request.httpMethod = type.httpMethod
-        request.allHTTPHeaderFields = NetworkManager.header
+        request.allHTTPHeaderFields = header
+        
+        if let query = query {
+            request.httpBody = query.data(using: .utf8)
+        }
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -87,7 +95,7 @@ class NetworkManager {
         }
         task.resume()
     }
-    
+ 
     // MARK: Handler
     struct ResultType<Type: Decodable> {
         static func handle(
@@ -96,13 +104,13 @@ class NetworkManager {
             
             switch result {
             case .success(let value):
-                let decoder = JSONDecoder()
-                guard let model = try? decoder.decode(Type.self, from: value) else {
-                    handler(.failure(NetworkError.jsonEncoding.value))
-                    return
+                do {
+                    let decoder = JSONDecoder()
+                    let model = try decoder.decode(Type.self, from: value)
+                    handler(.success(model))
+                } catch {
+                    handler(.failure(NetworkError.jsonEncoding(error: error).value))
                 }
-                handler(.success(model))
-                
             case .failure(let error):
                 handler(.failure(error))
             }
@@ -118,5 +126,5 @@ extension NetworkManager {
         handler: @escaping DataResultHandler) {
         let url = URL(string: urlString)
         request(with: url, type: type, handler: handler)
-    }
+    } 
 }

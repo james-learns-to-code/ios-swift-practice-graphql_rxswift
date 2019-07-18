@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		1C1209BA22B0DE99005D0972 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1209B822B0DE99005D0972 /* LaunchScreen.storyboard */; };
 		1C1209C522B0DE9A005D0972 /* BaseProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1209C422B0DE9A005D0972 /* BaseProjectTests.swift */; };
 		1C1209D022B0DE9A005D0972 /* BaseProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1209CF22B0DE9A005D0972 /* BaseProjectUITests.swift */; };
+		1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */; };
+		1C2E837122E018A10045313C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E837022E018A10045313C /* .gitignore */; };
+		1C2E837322E019E80045313C /* GitHubAccessToken.credential in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E837222E019E70045313C /* GitHubAccessToken.credential */; };
 		1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */; };
 		1CC76F2922B3D3E600D39971 /* StarwarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2822B3D3E600D39971 /* StarwarsView.swift */; };
 		1CC76F2C22B3D43D00D39971 /* StarwarsNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */; };
@@ -64,6 +67,9 @@
 		1C1209D122B0DE9A005D0972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C1209DD22B0E119005D0972 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		1C1209DE22B0E119005D0972 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
+		1C2E837022E018A10045313C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		1C2E837222E019E70045313C /* GitHubAccessToken.credential */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GitHubAccessToken.credential; sourceTree = SOURCE_ROOT; };
 		1C93AFA922B1130700C6105B /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		1CC76F2622B3D3AF00D39971 /* StarwarsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsViewController.swift; sourceTree = "<group>"; };
 		1CC76F2822B3D3E600D39971 /* StarwarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarwarsView.swift; sourceTree = "<group>"; };
@@ -166,6 +172,8 @@
 				1C1209B822B0DE99005D0972 /* LaunchScreen.storyboard */,
 				1C1209BB22B0DE99005D0972 /* Info.plist */,
 				1C93AFA922B1130700C6105B /* .swiftlint.yml */,
+				1C2E837022E018A10045313C /* .gitignore */,
+				1C2E837222E019E70045313C /* GitHubAccessToken.credential */,
 				1C1209DE22B0E119005D0972 /* LICENSE */,
 				1C1209DD22B0E119005D0972 /* README.md */,
 			);
@@ -224,6 +232,7 @@
 			children = (
 				9437FB4322B422AF00CE74C5 /* NetworkManager.swift */,
 				1CC76F2B22B3D43D00D39971 /* StarwarsNetworkManager.swift */,
+				1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -409,6 +418,8 @@
 				94195F2F22B4AD74001B788B /* StarwarsViewControllerWithXib.xib in Resources */,
 				1C1209B722B0DE99005D0972 /* Assets.xcassets in Resources */,
 				1C1209B522B0DE99005D0972 /* Main.storyboard in Resources */,
+				1C2E837122E018A10045313C /* .gitignore in Resources */,
+				1C2E837322E019E80045313C /* GitHubAccessToken.credential in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +549,7 @@
 				9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */,
 				1CC76F2722B3D3AF00D39971 /* StarwarsViewController.swift in Sources */,
 				9437FB4222B4191200CE74C5 /* StarwarsFilmCell.swift in Sources */,
+				1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */,
 				94195F2D22B4AD4D001B788B /* StarwarsViewControllerWithXib.swift in Sources */,
 				1CC76F2C22B3D43D00D39971 /* StarwarsNetworkManager.swift in Sources */,
 				1C1209B222B0DE99005D0972 /* ViewController.swift in Sources */,

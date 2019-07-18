@@ -38,4 +38,25 @@ final class ViewController: UIViewController {
         let vc = StarwarsViewControllerWithXib(nibName: "StarwarsViewControllerWithXib", bundle: nil)
         present(vc, animated: true, completion: nil)
     }
+    
+    // MARK: Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        fetchUserList()
+    }
+    
+    // MARK: API
+    func fetchUserList() {
+        let name = "james"
+        GitHubNetworkManager.shared.requestUserListByName(name) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
