@@ -24,7 +24,7 @@ extension StarwarsNetworkManager {
         handler: @escaping (Result<StarwarsFilmsModel, Error>) -> Void) {
         request(with: StarwarsNetworkManager.URL.film, type: .get) { result in
             ResultType<StarwarsFilmsModel>
-                .handle(result, handler: handler)
+                .handleResult(result, handler: handler)
         }
     }
 }
