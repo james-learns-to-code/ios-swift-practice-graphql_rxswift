@@ -43,7 +43,8 @@ final class ViewController: UIViewController {
         tableView.rx.willDisplayCell.asDriver()
             .drive(onNext: { cell, indexPath in
                 if tableView.isLastRow(with: indexPath) == true {
-                    self.viewModel.searchGithubUserIfCan(by: searchBar.text, isPagination: true)
+                    self.viewModel.searchGithubUserIfCan(
+                        by: searchBar.text, isPagination: true)
                 }
             })
             .disposed(by: disposeBag)
@@ -82,7 +83,8 @@ final class ViewController: UIViewController {
  
         viewModel.users
             .bind(to: tableView.rx
-                .items(cellIdentifier: "\(GitHubUserCell.self)")) { indexPath, user, cell in
+                .items(cellIdentifier: "\(GitHubUserCell.self)")) {
+                    index, user, cell in
                     guard let cell = cell as? GitHubUserCell else { return }
                     cell.configure(user: user)
             }
