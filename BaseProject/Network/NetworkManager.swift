@@ -84,9 +84,9 @@ class NetworkManager {
         return task
     }
  
-    // MARK: Handler
-    struct ResultType<Type: Decodable> {
-        static func handleResult(
+    // MARK: Decoder
+    struct ResponseType<Type: Decodable> {
+        static func decodeResult(
             _ result: DataResult,
             handler: @escaping (Result<Type, NetworkError>) -> Void) {
             
