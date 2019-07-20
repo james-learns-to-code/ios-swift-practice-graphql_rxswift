@@ -23,8 +23,8 @@ extension GitHubNetworkManager {
             type: .post,
             header: GitHubNetworkManager.header,
             body: body) { result in
-                ResultType<GitHubSearchResultResponseModel>
-                    .handleResult(result) { result in
+                ResponseType<GitHubSearchResultResponseModel>
+                    .decodeResult(result) { result in
                         switch result {
                         case .success(let value):
                             if let errors = value.errors {
