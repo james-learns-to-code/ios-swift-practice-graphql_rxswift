@@ -9,12 +9,12 @@
 import Foundation
 
 extension GitHubNetworkManager {
-    typealias SearchResultHandler = (Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
+    typealias SearchResultResultHandler = (Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
 
     func requestUserListByName(
         _ name: String,
         cursor: String? = nil,
-        handler: @escaping SearchResultHandler) -> URLSessionDataTask {
+        handler: @escaping SearchResultResultHandler) -> URLSessionDataTask {
         
         let body = QueryReplacer.getReplacedForQuerySearchUser(name: name, cursor: cursor)
 
