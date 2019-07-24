@@ -12,7 +12,7 @@ enum NetworkError: Error {
     case url
     case response(error: Error?)
     case data
-    case jsonEncoding(error: Error?)
+    case jsonDecoding(error: Error?)
     case query
     case githubApi(errors: [GitHubResponseErrorModel]?)
  
@@ -97,7 +97,7 @@ class NetworkManager {
                     let value = try decoder.decode(Type.self, from: data)
                     handler(.success(value))
                 } catch {
-                    handler(.failure(.jsonEncoding(error: error)))
+                    handler(.failure(.jsonDecoding(error: error)))
                 }
             case .failure(let error):
                 print(error)
