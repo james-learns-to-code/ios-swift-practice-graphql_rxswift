@@ -12,7 +12,7 @@ enum NetworkError: Error {
     case url
     case response(error: Error?)
     case data
-    case jsonEncoding(error: Error?)
+    case jsonDecoding(error: Error?)
     case query
     case githubApi(errors: [GitHubResponseErrorModel]?)
  
@@ -62,9 +62,13 @@ class NetworkManager {
     }
     
     @discardableResult
-    func request(with session: URLSession, _ request: URLRequest, _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
+    func request(
+        with session: URLSession,
+        _ request: URLRequest,
+        _ handler: @escaping DataResultHandler) -> URLSessionDataTask {
+        
         let task = session.dataTask(with: request) {
-            (responseData, response, responseError) in
+            responseData, response, responseError in
             
             guard responseError == nil else {
                 handler(.failure(.response(error: responseError)))
@@ -80,9 +84,9 @@ class NetworkManager {
         return task
     }
  
-    // MARK: Handler
-    struct ResultType<Type: Decodable> {
-        static func handleResult(
+    // MARK: Decoder
+    struct ResponseType<Type: Decodable> {
+        static func decodeResult(
             _ result: DataResult,
             handler: @escaping (Result<Type, NetworkError>) -> Void) {
             
@@ -93,7 +97,7 @@ class NetworkManager {
                     let value = try decoder.decode(Type.self, from: data)
                     handler(.success(value))
                 } catch {
-                    handler(.failure(.jsonEncoding(error: error)))
+                    handler(.failure(.jsonDecoding(error: error)))
                 }
             case .failure(let error):
                 print(error)

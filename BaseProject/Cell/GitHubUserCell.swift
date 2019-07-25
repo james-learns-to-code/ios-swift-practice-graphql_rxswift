@@ -20,7 +20,7 @@ final class GitHubUserCell: UITableViewCell {
     
     // MARK: Interface
     func configure(user: GitHubSearchUserModel?) {
-        profileImageView.setKFImage(with: user?.avatarUrl)
+        profileImageView.setImageByKF(with: user?.avatarUrl)
         idLabel.text = user?.login
         repoDescriptionLabel.text = GitHubUserCellViewModel.getRepositoryDescription(from: user)
     }
@@ -51,21 +51,17 @@ final class GitHubUserCell: UITableViewCell {
             make.width.height.equalTo(60)
             make.leading.top.equalTo(self).inset(10)
         }
-        
         addSubview(idLabel)
         idLabel.snp.makeConstraints { make in
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(80)
-            make.top.equalTo(self).inset(10)
-            make.trailing.equalTo(self).inset(10)
+            make.top.trailing.equalTo(self).inset(10)
         }
-        
         addSubview(repoDescriptionLabel)
         repoDescriptionLabel.snp.makeConstraints { make in
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(80)
-            make.top.equalTo(self).inset(40)
-            make.trailing.equalTo(self).inset(10)
+            make.bottom.trailing.equalTo(self).inset(10)
         }
     }
     required init?(coder aDecoder: NSCoder) {

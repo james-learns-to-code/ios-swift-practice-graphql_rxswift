@@ -10,10 +10,10 @@ import UIKit
 import Kingfisher
 
 extension UIImageView {
-    func setKFImage(with urlString: String?, placeholder: UIImage? = nil, completionHandler: ((Result<RetrieveImageResult, KingfisherError>) -> Void)? = nil) {
+    func setImageByKF(with urlString: String?) {
         kf.cancelDownloadTask()
         guard let string = urlString else { return }
         let url = URL(string: string)
-        kf.setImage(with: url, placeholder: placeholder, completionHandler: completionHandler)
+        kf.setImage(with: url)
     }
 }

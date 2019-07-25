@@ -82,7 +82,8 @@ final class ViewController: UIViewController {
  
         viewModel.users
             .bind(to: tableView.rx
-                .items(cellIdentifier: "\(GitHubUserCell.self)")) { indexPath, user, cell in
+                .items(cellIdentifier: "\(GitHubUserCell.self)")) {
+                    index, user, cell in
                     guard let cell = cell as? GitHubUserCell else { return }
                     cell.configure(user: user)
             }

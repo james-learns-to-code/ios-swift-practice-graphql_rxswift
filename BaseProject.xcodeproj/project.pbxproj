@@ -27,7 +27,6 @@
 		1C2F058622E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F058522E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift */; };
 		77E51B4336D2E2AB14E53FA7 /* Pods_BaseProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C72B98D968C2E5264CC41B6 /* Pods_BaseProject.framework */; };
 		9437FB3B22B40AFD00CE74C5 /* NetworkResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB3A22B40AFD00CE74C5 /* NetworkResponseTests.swift */; };
-		9437FB3F22B4175D00CE74C5 /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB3E22B4175D00CE74C5 /* Binding.swift */; };
 		9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9437FB4322B422AF00CE74C5 /* NetworkManager.swift */; };
 		BFC9E84AFF25960F5EDF9FB1 /* libPods-BaseProjectUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C1A6A20967138EEC099ACBE /* libPods-BaseProjectUITests.a */; };
 		CA0DEAF95BDD75AD4ACEA4D6 /* libPods-BaseProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A22E9ADBC8272E23CA3965D /* libPods-BaseProjectTests.a */; };
@@ -90,7 +89,6 @@
 		7DF7349B5DAC0BD306BE4B31 /* Pods-BaseProjectTests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectTests.analyze.xcconfig"; path = "Target Support Files/Pods-BaseProjectTests/Pods-BaseProjectTests.analyze.xcconfig"; sourceTree = "<group>"; };
 		8C72B98D968C2E5264CC41B6 /* Pods_BaseProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9437FB3A22B40AFD00CE74C5 /* NetworkResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseTests.swift; sourceTree = "<group>"; };
-		9437FB3E22B4175D00CE74C5 /* Binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
 		9437FB4322B422AF00CE74C5 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A11D15BCF582F81A05CB3B74 /* Pods-BaseProjectUITests.analyze.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectUITests.analyze.xcconfig"; path = "Pods/Target Support Files/Pods-BaseProjectUITests/Pods-BaseProjectUITests.analyze.xcconfig"; sourceTree = "<group>"; };
 		AEA51FE4FB1D9C1D24F32736 /* Pods-BaseProjectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseProjectUITests.release.xcconfig"; path = "Target Support Files/Pods-BaseProjectUITests/Pods-BaseProjectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -270,7 +268,6 @@
 		9437FB3D22B4174F00CE74C5 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				9437FB3E22B4175D00CE74C5 /* Binding.swift */,
 				1C2F057D22E09930007B059E /* UITableViewExtension.swift */,
 				1C2F057F22E0D1D2007B059E /* UIImageView+KingfisherExtension.swift */,
 				1C2F058322E0E8C3007B059E /* StringExtension.swift */,
@@ -561,7 +558,6 @@
 				1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */,
 				1C2F058622E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift in Sources */,
 				1C1209B222B0DE99005D0972 /* ViewController.swift in Sources */,
-				9437FB3F22B4175D00CE74C5 /* Binding.swift in Sources */,
 				1C1209B022B0DE99005D0972 /* AppDelegate.swift in Sources */,
 				1C2F058422E0E8C3007B059E /* StringExtension.swift in Sources */,
 				1C2E837C22E0230F0045313C /* GitHubUserCell.swift in Sources */,

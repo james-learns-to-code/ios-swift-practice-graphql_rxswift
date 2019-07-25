@@ -24,7 +24,6 @@ final class GitHubView: UIView {
         let ctr = UISearchController(searchResultsController: nil)
         ctr.hidesNavigationBarDuringPresentation = false
         ctr.dimsBackgroundDuringPresentation = false
-        ctr.searchBar.showsCancelButton = false
         return ctr
     }()
     
