@@ -46,19 +46,16 @@ final class GitHubUserCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)
         
-        addSubview(profileImageView)
-        profileImageView.snp.makeConstraints { make in
+        addSubview(profileImageView) { make in
             make.width.height.equalTo(60)
             make.leading.top.equalTo(self).inset(10)
         }
-        addSubview(idLabel)
-        idLabel.snp.makeConstraints { make in
+        addSubview(idLabel) { make in
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(80)
             make.top.trailing.equalTo(self).inset(10)
         }
-        addSubview(repoDescriptionLabel)
-        repoDescriptionLabel.snp.makeConstraints { make in
+        addSubview(repoDescriptionLabel) { make in
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(80)
             make.bottom.trailing.equalTo(self).inset(10)

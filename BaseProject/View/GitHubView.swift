@@ -45,8 +45,7 @@ final class GitHubView: UIView {
     }
     
     private func setupViews() {
-        addSubview(tableView)
-        tableView.snp.makeConstraints { make in
+        addSubview(tableView) { make in
             make.top.bottom.leading.trailing.equalTo(self)
         }
         tableView.tableHeaderView = searchController.searchBar

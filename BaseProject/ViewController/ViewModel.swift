@@ -23,39 +23,43 @@ final class ViewModel {
     }
     
     func cancelRequest() {
+        guard dataTask?.state != .completed else { return }
         dataTask?.cancel()
     }
     
     // MARK: Pagination
     
     private var pageInfo: GitHubPageInfoModel?
+    private var hasNextPage: Bool {
+        return pageInfo?.hasNextPage ?? false
+    }
+    private var endCursor: String? {
+        return pageInfo?.endCursor
+    }
     
     // MARK: API
     private var dataTask: URLSessionDataTask?
-    func searchGithubUserIfCan(by name: String?, isPagination: Bool = false) {
-        if isPagination {
-            guard let hasNextPage = pageInfo?.hasNextPage else { return }
+    func searchGithubUserIfCan(by name: String?, pagination: Bool = false) {
+        if pagination {
             guard hasNextPage == true else { return }
-        } else {
-            pageInfo = nil
         }
         guard let name = name, name.count > 0 else {
             resetData()
             return
         }
-        searchGithubUser(by: name, isPagination: isPagination)
+        searchGithubUser(by: name, pagination: pagination)
     }
     
-    private func searchGithubUser(by name: String, isPagination: Bool) {
+    private func searchGithubUser(by name: String, pagination: Bool) {
         dataTask = GitHubNetworkManager.shared
-            .requestUserListByName(name, cursor: pageInfo?.endCursor) {
+            .requestUserListByName(name, cursor: endCursor) {
                 [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let value):
                     self.pageInfo = value.data?.search?.pageInfo
                     guard var users = value.data?.search?.nodes else { return }
-                    if isPagination {
+                    if pagination {
                         users = self.users.value + users
                     }
                     self.users.accept(users)
@@ -68,5 +72,3 @@ final class ViewModel {
     static let title = "Github Repos"
     static let bottomInset = 100
 }
-
-

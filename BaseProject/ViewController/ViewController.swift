@@ -30,28 +30,29 @@ final class ViewController: UIViewController {
     
     private func setup() {
         title = ViewModel.title
-        setupRX()
+        setupRx()
     }
     
     private let disposeBag = DisposeBag()
-    private func setupRX() {
+    private func setupRx() {
         let searchBar = customView.searchController.searchBar
         let tableView = customView.tableView
+        let viewModel = self.viewModel
         
-        // MARK: UI
+        // UI
         
         tableView.rx.willDisplayCell.asDriver()
             .drive(onNext: {
-                [weak self, weak tableView, weak searchBar] cell, indexPath in
-                if tableView?.isLastRow(with: indexPath) == true {
-                    self?.viewModel.searchGithubUserIfCan(by: searchBar?.text, isPagination: true)
+                cell, indexPath in
+                if tableView.isLastRow(with: indexPath) {
+                    viewModel.searchGithubUserIfCan(
+                        by: searchBar.text, pagination: true)
                 }
             })
             .disposed(by: disposeBag)
 
         tableView.rx.contentOffset.asDriver()
-            .drive(onNext: { [weak searchBar] offset in
-                guard let searchBar = searchBar else { return }
+            .drive(onNext: { offset in
                 if searchBar.isFirstResponder {
                     searchBar.resignFirstResponder()
                 }
@@ -59,35 +60,34 @@ final class ViewController: UIViewController {
             .disposed(by: disposeBag)
                 
         searchBar.rx.text.orEmpty.asDriver()
-            .throttle(.milliseconds(1000))
+            .debounce(.milliseconds(500))
             .distinctUntilChanged()
-            .drive(onNext: { [weak self] query in
-                self?.viewModel.searchText.accept(query)
+            .drive(onNext: { query in
+                viewModel.searchText.accept(query)
             })
             .disposed(by: disposeBag)
  
         searchBar.rx.cancelButtonClicked.asDriver()
-            .drive(onNext: { [weak self] _ in
-                self?.viewModel.searchText.accept("")
+            .drive(onNext: { _ in
+                viewModel.searchText.accept("")
             })
             .disposed(by: disposeBag)
 
-        // MARK: Data
+        // Data
         
         viewModel.searchText
-            .bind { [weak self] query in
-                guard let viewModel = self?.viewModel else { return }
-                viewModel.cancelRequest()
-                viewModel.searchGithubUserIfCan(by: query)
+            .bind { [weak viewModel] query in
+                viewModel?.cancelRequest()
+                viewModel?.searchGithubUserIfCan(by: query)
             }
             .disposed(by: disposeBag)
  
-        viewModel.users
-            .bind(to: tableView.rx
+        viewModel.users.asDriver()
+            .drive(tableView.rx
                 .items(cellIdentifier: "\(GitHubUserCell.self)")) {
                     index, user, cell in
-                    guard let cell = cell as? GitHubUserCell else { return }
-                    cell.configure(user: user)
+                    let cell = cell as? GitHubUserCell
+                    cell?.configure(user: user)
             }
             .disposed(by: disposeBag)
     }

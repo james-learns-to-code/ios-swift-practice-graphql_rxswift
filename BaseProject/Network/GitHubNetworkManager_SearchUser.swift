@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+ 
 extension GitHubNetworkManager {
     typealias SearchResultResultHandler = (Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
 
@@ -16,7 +16,7 @@ extension GitHubNetworkManager {
         cursor: String? = nil,
         handler: @escaping SearchResultResultHandler) -> URLSessionDataTask {
         
-        let body = QueryReplacer.getReplacedForQuerySearchUser(name: name, cursor: cursor)
+        let body = QueryReplacer.getQuerySearchUserByReplacing(name: name, cursor: cursor)
 
         return request(
             with: GitHubNetworkManager.url,
