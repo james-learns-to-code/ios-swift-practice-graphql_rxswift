@@ -41,10 +41,9 @@ final class ViewController: UIViewController {
         // MARK: UI
         
         tableView.rx.willDisplayCell.asDriver()
-            .drive(onNext: { cell, indexPath in
+            .drive(onNext: { [weak self] cell, indexPath in
                 if tableView.isLastRow(with: indexPath) == true {
-                    self.viewModel.searchGithubUserIfCan(
-                        by: searchBar.text, isPagination: true)
+                    self?.viewModel.searchGithubUserIfCan(by: searchBar.text, isPagination: true)
                 }
             })
             .disposed(by: disposeBag)
@@ -60,14 +59,14 @@ final class ViewController: UIViewController {
         searchBar.rx.text.orEmpty.asDriver()
             .throttle(.milliseconds(1000))
             .distinctUntilChanged()
-            .drive(onNext: { query in
-                self.viewModel.searchText.accept(query)
+            .drive(onNext: { [weak self] query in
+                self?.viewModel.searchText.accept(query)
             })
             .disposed(by: disposeBag)
  
         searchBar.rx.cancelButtonClicked.asDriver()
-            .drive(onNext: { _ in
-                self.viewModel.searchText.accept("")
+            .drive(onNext: { [weak self] _ in
+                self?.viewModel.searchText.accept("")
             })
             .disposed(by: disposeBag)
 
