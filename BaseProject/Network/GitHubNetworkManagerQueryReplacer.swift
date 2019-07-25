@@ -21,7 +21,7 @@ extension GitHubNetworkManager {
         static let parameterCursor = ", $cursor: String!"
         static let parameterAfterCursor = ", after: $cursor"
     
-        static func getReplacedForQuerySearchUser(name: String, cursor: String?) -> String {
+        static func getQuerySearchUserByReplacing(name: String, cursor: String?) -> String {
             var body = querySearchUser
                 .replacingOccurrences(of: userName, with: "\"\(name)\"")
                 .replacingOccurrences(of: numOfItem, with: "\(GitHubNetworkManager.defaultNumOfItem)")
