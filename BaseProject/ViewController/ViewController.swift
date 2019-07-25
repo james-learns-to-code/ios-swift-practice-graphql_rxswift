@@ -41,15 +41,17 @@ final class ViewController: UIViewController {
         // MARK: UI
         
         tableView.rx.willDisplayCell.asDriver()
-            .drive(onNext: { [weak self] cell, indexPath in
-                if tableView.isLastRow(with: indexPath) == true {
-                    self?.viewModel.searchGithubUserIfCan(by: searchBar.text, isPagination: true)
+            .drive(onNext: {
+                [weak self, weak tableView, weak searchBar] cell, indexPath in
+                if tableView?.isLastRow(with: indexPath) == true {
+                    self?.viewModel.searchGithubUserIfCan(by: searchBar?.text, isPagination: true)
                 }
             })
             .disposed(by: disposeBag)
 
         tableView.rx.contentOffset.asDriver()
-            .drive(onNext: { offset in
+            .drive(onNext: { [weak searchBar] offset in
+                guard let searchBar = searchBar else { return }
                 if searchBar.isFirstResponder {
                     searchBar.resignFirstResponder()
                 }
