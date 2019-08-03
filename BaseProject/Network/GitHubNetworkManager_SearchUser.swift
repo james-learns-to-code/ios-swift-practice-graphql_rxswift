@@ -16,8 +16,10 @@ extension GitHubNetworkManager {
         cursor: String? = nil,
         handler: @escaping SearchResultResultHandler) -> URLSessionDataTask {
         
-        let body = QueryReplacer.getQuerySearchUserByReplacing(name: name, cursor: cursor)
-
+        let body = QueryReplacer.getSearchUserQueryByReplacing(
+            GitHubNetworkManager.searchUserQuery,
+            name: name,
+            cursor: cursor)
         return request(
             with: GitHubNetworkManager.url,
             type: .post,
@@ -40,7 +42,7 @@ extension GitHubNetworkManager {
     }
     
     // MARK: GraphQL Query
-    static let querySearchUser =
+    private static let searchUserQuery =
     """
 { \
    "query": \

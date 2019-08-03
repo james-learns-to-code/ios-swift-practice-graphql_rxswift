@@ -10,32 +10,34 @@ import Foundation
 
 extension GitHubNetworkManager {
     struct QueryReplacer {
-        static let base = "&QUERY_REPLACE_"
-        static let userName = base + "USER_NAME"
-        static let numOfItem = base + "NUM_OF_ITEM"
-        static let afterCursor = base + "CURSOR"
-        static let variableCursor = """
+        private static let base = "&QUERY_REPLACE_"
+        private static let userName = base + "USER_NAME"
+        private static let numOfItem = base + "NUM_OF_ITEM"
+        private static let afterCursor = base + "CURSOR"
+        private static let variableCursor = """
 , \
   "cursor": &QUERY_REPLACE_CURSOR
 """
-        static let parameterCursor = ", $cursor: String!"
-        static let parameterAfterCursor = ", after: $cursor"
-    
-        static func getQuerySearchUserByReplacing(name: String, cursor: String?) -> String {
-            var body = querySearchUser
-                .replacingOccurrences(of: userName, with: "\"\(name)\"")
-                .replacingOccurrences(of: numOfItem, with: "\(GitHubNetworkManager.defaultNumOfItem)")
-            
-            if let cursor = cursor {
-                body = body
-                    .replacingOccurrences(of: afterCursor, with: "\"\(cursor)\"")
-            } else {
-                body = body
-                    .replacingOccurrences(of: parameterCursor, with: "")
-                    .replacingOccurrences(of: parameterAfterCursor, with: "")
-                    .replacingOccurrences(of: variableCursor, with: "")
-            }
-            return body
+        private static let parameterCursor = ", $cursor: String!"
+        private static let parameterAfterCursor = ", after: $cursor"
+    }
+}
+
+extension GitHubNetworkManager.QueryReplacer {
+    static func getSearchUserQueryByReplacing(_ query: String, name: String, cursor: String?) -> String {
+        var body = query
+            .replacingOccurrences(of: userName, with: "\"\(name)\"")
+            .replacingOccurrences(of: numOfItem, with: "\(GitHubNetworkManager.defaultNumOfItem)")
+        
+        if let cursor = cursor {
+            body = body
+                .replacingOccurrences(of: afterCursor, with: "\"\(cursor)\"")
+        } else {
+            body = body
+                .replacingOccurrences(of: parameterCursor, with: "")
+                .replacingOccurrences(of: parameterAfterCursor, with: "")
+                .replacingOccurrences(of: variableCursor, with: "")
         }
+        return body
     }
 }
