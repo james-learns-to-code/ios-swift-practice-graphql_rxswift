@@ -9,34 +9,34 @@
 import Foundation
 
 struct GitHubSearchResultResponseModel: Codable {
-    private(set) var data: GitHubSearchResultModel?
-    private(set) var errors: [GitHubResponseErrorModel]?
+    let data: GitHubSearchResultModel?
+    let errors: [GitHubResponseErrorModel]?
 }
 
 struct GitHubResponseErrorModel: Codable {
-    private(set) var message: String?
+    let message: String?
 }
 
 struct GitHubSearchResultModel: Codable {
-    private(set) var search: GitHubSearchNodesModel?
+    let search: GitHubSearchNodesModel?
 }
 
 struct GitHubSearchNodesModel: Codable {
-    private(set) var nodes: [GitHubSearchUserModel]?
-    private(set) var pageInfo: GitHubPageInfoModel?
+    let nodes: [GitHubSearchUserModel]?
+    let pageInfo: GitHubPageInfoModel?
 }
 
 struct GitHubSearchUserModel: Codable {
-    private(set) var login: String?
-    private(set) var avatarUrl: String?
-    private(set) var repositories: GitHubRepositoriesModel?
+    let login: String?
+    let avatarUrl: String?
+    let repositories: GitHubRepositoriesModel?
 }
 
 struct GitHubRepositoriesModel: Codable {
-    private(set) var totalCount: Int?
+    let totalCount: Int?
 }
 
 struct GitHubPageInfoModel: Codable {
-    private(set) var endCursor: String?
-    private(set) var hasNextPage: Bool?
+    let endCursor: String?
+    let hasNextPage: Bool?
 }

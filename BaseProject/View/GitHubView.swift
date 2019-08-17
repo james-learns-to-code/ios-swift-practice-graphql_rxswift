@@ -7,25 +7,23 @@
 //
 
 import UIKit
+import Then
 import SnapKit
 import SwiftUtilityKit
 
 final class GitHubView: UIView {
     
-    lazy var tableView: UITableView = {
-        let view = UITableView()
+    lazy var tableView = UITableView().then { view in
         view.register(GitHubUserCell.self)
         view.rowHeight = GitHubUserCell.height
         view.contentInset.bottom = CGFloat(ViewModel.bottomInset)
-        return view
-    }()
+    }
     
-    lazy var searchController: UISearchController = {
-        let ctr = UISearchController(searchResultsController: nil)
-        ctr.hidesNavigationBarDuringPresentation = false
-        ctr.dimsBackgroundDuringPresentation = false
-        return ctr
-    }()
+    lazy var searchController =
+        UISearchController(searchResultsController: nil).then { ctr in
+            ctr.hidesNavigationBarDuringPresentation = false
+            ctr.dimsBackgroundDuringPresentation = false
+    }
     
     required init() {
         super.init(frame: .zero)

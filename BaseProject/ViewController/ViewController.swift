@@ -15,10 +15,7 @@ final class ViewController: UIViewController {
     
     // MARK: View switching
     
-    private lazy var customView: GitHubView = {
-        let view = GitHubView()
-        return view
-    }()
+    private lazy var customView = GitHubView()
     
     override func loadView() {
         super.loadView()
@@ -45,22 +42,20 @@ final class ViewController: UIViewController {
             .drive(onNext: {
                 cell, indexPath in
                 if tableView.isLastRow(with: indexPath) {
-                    viewModel.searchGithubUserIfCan(
-                        by: searchBar.text, pagination: true)
+                    viewModel.searchMoreGithubUserIfCan(
+                        by: searchBar.text)
                 }
             })
             .disposed(by: disposeBag)
 
         tableView.rx.contentOffset.asDriver()
             .drive(onNext: { offset in
-                if searchBar.isFirstResponder {
-                    searchBar.resignFirstResponder()
-                }
+                searchBar.resignFirstResponderIfIsFirstResponder()
             })
             .disposed(by: disposeBag)
                 
         searchBar.rx.text.orEmpty.asDriver()
-            .debounce(.milliseconds(500))
+            .debounce(.milliseconds(ViewModel.searchBarDebounceMSec))
             .distinctUntilChanged()
             .drive(onNext: { query in
                 viewModel.searchText.accept(query)
@@ -77,7 +72,7 @@ final class ViewController: UIViewController {
         
         viewModel.searchText
             .bind { [weak viewModel] query in
-                viewModel?.cancelRequest()
+                viewModel?.cancelRequestIfNotCompleted()
                 viewModel?.searchGithubUserIfCan(by: query)
             }
             .disposed(by: disposeBag)
@@ -89,6 +84,17 @@ final class ViewController: UIViewController {
                     let cell = cell as? GitHubUserCell
                     cell?.configure(user: user)
             }
+            .disposed(by: disposeBag)
+        
+        viewModel.error.asDriver(onErrorJustReturn: .undefined)
+            .drive(onNext: { [weak self] error in
+                let alert = UIAlertController(
+                    title: "Error",
+                    message: error.localizedDescription,
+                    doneButtonTitle: "OK"
+                )
+                self?.presentedViewController?.present(alert, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }

@@ -9,7 +9,10 @@
 import Foundation
 
 extension String {
-    static func getPureStringFromBundleResource(_ resource: String, ofType: String) -> String? {
+    static func getPureStringFromBundle(
+        _ resource: String,
+        ofType: String
+        ) -> String? {
         guard
             let filePath = Bundle.main.path(forResource: resource, ofType: ofType),
             let token = try? String(contentsOfFile: filePath, encoding: .utf8)

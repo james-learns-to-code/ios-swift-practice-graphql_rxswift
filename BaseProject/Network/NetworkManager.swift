@@ -9,6 +9,7 @@
 import Foundation
 
 enum NetworkError: Error {
+    case undefined
     case url
     case response(error: Error?)
     case data
@@ -17,11 +18,26 @@ enum NetworkError: Error {
     case githubApi(errors: [GitHubResponseErrorModel]?)
  
     static let domain = "app.network"
+    
+    var localizedDescription: String {
+        switch self {
+        case .response(let error):
+            return error?.localizedDescription ?? self.localizedDescription
+        case .jsonDecoding(let error):
+            return error?.localizedDescription ?? self.localizedDescription
+        case .githubApi(let errors):
+            return errors?.first?.message ?? self.localizedDescription
+        default:
+            return self.localizedDescription
+        }
+    }
 }
 
 class NetworkManager {
     
-    static let defaultHeader: [String: String] = [
+    typealias HeaderType = [String: String]
+    
+    static let defaultHeader: HeaderType = [
         "Content-Type": "application/json"
     ]
     
@@ -43,17 +59,14 @@ class NetworkManager {
     func request(
         with url: URL,
         type: RequestType,
-        header: [String: String] = NetworkManager.defaultHeader,
+        header: HeaderType = NetworkManager.defaultHeader,
         body: String? = nil,
         handler: @escaping DataResultHandler) -> URLSessionDataTask {
         
         var req = URLRequest(url: url)
         req.httpMethod = type.httpMethod
         req.allHTTPHeaderFields = header
-        
-        if let body = body {
-            req.httpBody = body.data(using: .utf8)
-        }
+        req.setHttpBodyIfExist(body)
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -85,7 +98,7 @@ class NetworkManager {
     }
  
     // MARK: Decoder
-    struct ResponseType<Type: Decodable> {
+    struct Decoder<Type: Decodable> {
         static func decodeResult(
             _ result: DataResult,
             handler: @escaping (Result<Type, NetworkError>) -> Void) {
