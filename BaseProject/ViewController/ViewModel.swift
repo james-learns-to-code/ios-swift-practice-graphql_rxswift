@@ -12,19 +12,23 @@ import RxCocoa
 
 final class ViewModel {
     
-    let users: BehaviorRelay<[GitHubSearchUserModel]> = BehaviorRelay(value: [])
-    let searchText: BehaviorRelay<String> = BehaviorRelay(value: "")
+    let users: BehaviorRelay<[GitHubSearchUserModel]> = .init(value: [])
+    let error = PublishRelay<NetworkError>()
+    let searchText = PublishRelay<String>()
 
     // MARK: Interface
 
-    func resetData() {
-        users.accept([])
-        pageInfo = nil
-    }
-    
-    func cancelRequest() {
+    func cancelRequestIfNotCompleted() {
         guard dataTask?.state != .completed else { return }
         dataTask?.cancel()
+    }
+    
+    func searchGithubUserIfCan(by name: String?) {
+        searchGithubUserIfCan(by: name, pagination: false)
+    }
+    func searchMoreGithubUserIfCan(by name: String?) {
+        guard hasNextPage else { return }
+        searchGithubUserIfCan(by: name, pagination: true)
     }
     
     // MARK: Pagination
@@ -37,19 +41,21 @@ final class ViewModel {
         return pageInfo?.endCursor
     }
     
+    // MARK: Data
+    private func resetData() {
+        users.accept([])
+        pageInfo = nil
+    }
+    
     // MARK: API
     private var dataTask: URLSessionDataTask?
-    func searchGithubUserIfCan(by name: String?, pagination: Bool = false) {
-        if pagination {
-            guard hasNextPage == true else { return }
-        }
+    private func searchGithubUserIfCan(by name: String?, pagination: Bool) {
         guard let name = name, name.count > 0 else {
             resetData()
             return
         }
         searchGithubUser(by: name, pagination: pagination)
     }
-    
     private func searchGithubUser(by name: String, pagination: Bool) {
         dataTask = GitHubNetworkManager.shared
             .requestUserListByName(name, cursor: endCursor) {
@@ -59,16 +65,19 @@ final class ViewModel {
                 case .success(let value):
                     self.pageInfo = value.data?.search?.pageInfo
                     guard var users = value.data?.search?.nodes else { return }
+                    
                     if pagination {
                         users = self.users.value + users
                     }
                     self.users.accept(users)
                 case .failure(let error):
-                    print(error)
+                    self.error.accept(error)
                 }
         }
     }
     
+    // MARK: UI
     static let title = "Github Repos"
     static let bottomInset = 100
+    static let searchBarDebounceMSec = 500
 }

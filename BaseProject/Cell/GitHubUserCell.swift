@@ -7,41 +7,35 @@
 //
 
 import UIKit
+import Then
 import SnapKit
 
 struct GitHubUserCellViewModel {
-    fileprivate static func getRepositoryDescription(from user: GitHubSearchUserModel?) -> String {
-        return "Number of repos: \(user?.repositories?.totalCount ?? 0)"
+    fileprivate static func getRepoDescription(
+        from user: GitHubSearchUserModel?) -> String {
+        let count = user?.repositories?.totalCount ?? 0
+        return "Number of repos: \(count)"
     }
 }
 
 final class GitHubUserCell: UITableViewCell {
+    typealias ViewModel = GitHubUserCellViewModel
     static let height: CGFloat = 80
     
     // MARK: Interface
     func configure(user: GitHubSearchUserModel?) {
         profileImageView.setImageByKF(with: user?.avatarUrl)
         idLabel.text = user?.login
-        repoDescriptionLabel.text = GitHubUserCellViewModel.getRepositoryDescription(from: user)
+        repoLabel.text = ViewModel.getRepoDescription(from: user)
     }
     
     // MARK: UI
     
-    private lazy var profileImageView: UIImageView = {
-        let view = UIImageView()
-        return view
-    }()
-    
-    private lazy var idLabel: UILabel = {
-        let view = UILabel()
-        return view
-    }()
-    
-    private lazy var repoDescriptionLabel: UILabel = {
-        let view = UILabel()
+    private lazy var profileImageView = UIImageView()
+    private lazy var idLabel = UILabel()
+    private lazy var repoLabel = UILabel().then { view in
         view.textColor = .gray
-        return view
-    }()
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value2, reuseIdentifier: reuseIdentifier)
@@ -55,7 +49,7 @@ final class GitHubUserCell: UITableViewCell {
             make.leading.equalTo(self).inset(80)
             make.top.trailing.equalTo(self).inset(10)
         }
-        addSubview(repoDescriptionLabel) { make in
+        addSubview(repoLabel) { make in
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(80)
             make.bottom.trailing.equalTo(self).inset(10)

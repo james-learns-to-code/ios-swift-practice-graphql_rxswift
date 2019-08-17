@@ -13,14 +13,18 @@ final class GitHubNetworkManager: NetworkManager {
     
     static let url = URL(string: "https://api.github.com/graphql")!
 
-    static let header: [String: String] = [
+    static let header: HeaderType = [
         "Content-Type": "application/json",
-        "Authorization": "token " + access_token
+        "Authorization": authorization
     ]
     
-    private static var access_token: String {
+    private static var authorization: String {
+        return "token " + accessToken
+    }
+    
+    private static var accessToken: String {
         guard let token = String
-            .getPureStringFromBundleResource("GitHubAccessToken", ofType: "credential") else {
+            .getPureStringFromBundle("GitHubAccessToken", ofType: "credential") else {
             assertionFailure("You need to create 'GitHubAccessToken.credential' file contains token for accessing GitHub API")
             return ""
         }

@@ -10,7 +10,10 @@ import UIKit
 import SnapKit
 
 extension UIView {
-    func addSubview(_ view: UIView, constraint: (_ make: ConstraintMaker) -> Void) {
+    func addSubview(
+        _ view: UIView,
+        constraint: (_ make: ConstraintMaker) -> Void
+        ) {
         addSubview(view)
         view.snp.makeConstraints(constraint)
     }

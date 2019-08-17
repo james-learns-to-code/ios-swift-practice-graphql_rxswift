@@ -25,7 +25,7 @@ extension GitHubNetworkManager {
             type: .post,
             header: GitHubNetworkManager.header,
             body: body) { result in
-                ResponseType<GitHubSearchResultResponseModel>
+                Decoder<GitHubSearchResultResponseModel>
                     .decodeResult(result) { result in
                         switch result {
                         case .success(let value):

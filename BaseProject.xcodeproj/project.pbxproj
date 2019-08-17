@@ -13,8 +13,10 @@
 		1C1209BA22B0DE99005D0972 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1209B822B0DE99005D0972 /* LaunchScreen.storyboard */; };
 		1C1209C522B0DE9A005D0972 /* BaseProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1209C422B0DE9A005D0972 /* BaseProjectTests.swift */; };
 		1C1209D022B0DE9A005D0972 /* BaseProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1209CF22B0DE9A005D0972 /* BaseProjectUITests.swift */; };
+		1C18E7DC23084B3800485521 /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E7DB23084B3800485521 /* UISearchBarExtension.swift */; };
+		1C18E7DE2308569600485521 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E7DD2308569600485521 /* UIAlertControllerExtension.swift */; };
+		1C18E7E023085F1C00485521 /* URLRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C18E7DF23085F1C00485521 /* URLRequestExtension.swift */; };
 		1C2E0DDC22EA12F8001538C9 /* UIView+SnapKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E0DDB22EA12F8001538C9 /* UIView+SnapKitExtension.swift */; };
-		1C2E0DE422EA498E001538C9 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E0DE322EA498E001538C9 /* RootViewController.swift */; };
 		1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */; };
 		1C2E837322E019E80045313C /* GitHubAccessToken.credential in Resources */ = {isa = PBXBuildFile; fileRef = 1C2E837222E019E70045313C /* GitHubAccessToken.credential */; };
 		1C2E837622E01D230045313C /* GitHubSearchResultResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E837522E01D230045313C /* GitHubSearchResultResponseModel.swift */; };
@@ -65,8 +67,10 @@
 		1C1209D122B0DE9A005D0972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C1209DD22B0E119005D0972 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = BaseProject/Resource/README.md; sourceTree = SOURCE_ROOT; };
 		1C1209DE22B0E119005D0972 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = BaseProject/Resource/LICENSE; sourceTree = SOURCE_ROOT; };
+		1C18E7DB23084B3800485521 /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
+		1C18E7DD2308569600485521 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		1C18E7DF23085F1C00485521 /* URLRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestExtension.swift; sourceTree = "<group>"; };
 		1C2E0DDB22EA12F8001538C9 /* UIView+SnapKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SnapKitExtension.swift"; sourceTree = "<group>"; };
-		1C2E0DE322EA498E001538C9 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		1C2E836A22DEDAB60045313C /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
 		1C2E837222E019E70045313C /* GitHubAccessToken.credential */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GitHubAccessToken.credential; path = BaseProject/Resource/GitHubAccessToken.credential; sourceTree = SOURCE_ROOT; };
 		1C2E837522E01D230045313C /* GitHubSearchResultResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResultResponseModel.swift; sourceTree = "<group>"; };
@@ -164,7 +168,6 @@
 				1CC76F2422B3D2FC00D39971 /* View */,
 				9437FB4022B418F100CE74C5 /* Cell */,
 				1CC76F2322B3D2DB00D39971 /* ViewController */,
-				1C2E0DE322EA498E001538C9 /* RootViewController.swift */,
 				1C1209AF22B0DE99005D0972 /* AppDelegate.swift */,
 				1C2E837422E01C040045313C /* Resource */,
 				1C1209BB22B0DE99005D0972 /* Info.plist */,
@@ -274,6 +277,9 @@
 				1C2F057F22E0D1D2007B059E /* UIImageView+KingfisherExtension.swift */,
 				1C2F058322E0E8C3007B059E /* StringExtension.swift */,
 				1C2E0DDB22EA12F8001538C9 /* UIView+SnapKitExtension.swift */,
+				1C18E7DB23084B3800485521 /* UISearchBarExtension.swift */,
+				1C18E7DD2308569600485521 /* UIAlertControllerExtension.swift */,
+				1C18E7DF23085F1C00485521 /* URLRequestExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -555,12 +561,14 @@
 				1C2F057E22E09930007B059E /* UITableViewExtension.swift in Sources */,
 				9437FB4422B422AF00CE74C5 /* NetworkManager.swift in Sources */,
 				1C2E837622E01D230045313C /* GitHubSearchResultResponseModel.swift in Sources */,
-				1C2E0DE422EA498E001538C9 /* RootViewController.swift in Sources */,
+				1C18E7E023085F1C00485521 /* URLRequestExtension.swift in Sources */,
 				1C2F058022E0D1D2007B059E /* UIImageView+KingfisherExtension.swift in Sources */,
 				1C2E837E22E0295A0045313C /* GitHubView.swift in Sources */,
 				1C2E0DDC22EA12F8001538C9 /* UIView+SnapKitExtension.swift in Sources */,
 				1C2E836B22DEDAB60045313C /* GitHubNetworkManager.swift in Sources */,
 				1C2F058622E0EA02007B059E /* GitHubNetworkManagerQueryReplacer.swift in Sources */,
+				1C18E7DC23084B3800485521 /* UISearchBarExtension.swift in Sources */,
+				1C18E7DE2308569600485521 /* UIAlertControllerExtension.swift in Sources */,
 				1C1209B222B0DE99005D0972 /* ViewController.swift in Sources */,
 				1C1209B022B0DE99005D0972 /* AppDelegate.swift in Sources */,
 				1C2F058422E0E8C3007B059E /* StringExtension.swift in Sources */,
