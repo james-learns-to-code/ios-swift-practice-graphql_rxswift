@@ -42,11 +42,18 @@ final class ViewModel {
     }
     
     // MARK: Data
+    
     private func resetData() {
         users.accept([])
         pageInfo = nil
     }
     
+    func getAvataUrl(at indexPath: IndexPath) -> URL? {
+        guard let urlStr = users.value[safe: indexPath.row]?.avatarUrl else { return nil }
+        guard let url = URL(string: urlStr) else { return nil }
+        return url
+    }
+     
     // MARK: API
     private var dataTask: URLSessionDataTask?
     private func searchGithubUserIfCan(by name: String?, pagination: Bool) {

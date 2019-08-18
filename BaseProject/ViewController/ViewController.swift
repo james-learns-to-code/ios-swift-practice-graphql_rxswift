@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Kingfisher
 
 final class ViewController: UIViewController {
     private let viewModel = ViewModel()
@@ -47,10 +48,19 @@ final class ViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        tableView.rx.prefetchRows
+            .subscribe(onNext: { indexPaths in
+                let urls = indexPaths.compactMap {
+                    viewModel.getAvataUrl(at: $0)
+                }
+                ImagePrefetcher(urls: urls).start()
+            })
+            .disposed(by: disposeBag)
 
         tableView.rx.contentOffset.asDriver()
             .drive(onNext: { offset in
-                searchBar.resignFirstResponderIfIsFirstResponder()
+                searchBar.resignFirstResponderIfIs()
             })
             .disposed(by: disposeBag)
                 
