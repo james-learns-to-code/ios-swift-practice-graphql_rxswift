@@ -9,7 +9,7 @@
 import UIKit
 
 extension UISearchBar {
-    func resignFirstResponderIfIsFirstResponder() {
+    func resignFirstResponderIfIs() {
         guard isFirstResponder else { return }
         resignFirstResponder()
     }
