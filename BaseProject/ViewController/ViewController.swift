@@ -82,7 +82,6 @@ final class ViewController: UIViewController {
         
         viewModel.searchText
             .bind { [weak viewModel] query in
-                viewModel?.cancelRequestIfNotCompleted()
                 viewModel?.searchGithubUserIfCan(by: query)
             }
             .disposed(by: disposeBag)

@@ -17,13 +17,9 @@ final class ViewModel {
     let searchText = PublishRelay<String>()
 
     // MARK: Interface
-
-    func cancelRequestIfNotCompleted() {
-        guard dataTask?.state != .completed else { return }
-        dataTask?.cancel()
-    }
     
     func searchGithubUserIfCan(by name: String?) {
+        dataTask?.cancelIfNotCompleted()
         searchGithubUserIfCan(by: name, pagination: false)
     }
     func searchMoreGithubUserIfCan(by name: String?) {
