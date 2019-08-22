@@ -19,7 +19,6 @@ final class ViewController: UIViewController {
     private lazy var customView = GitHubView()
     
     override func loadView() {
-        super.loadView()
         view = customView
         setup()
     }
