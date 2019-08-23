@@ -19,7 +19,6 @@ final class ViewController: UIViewController {
     private lazy var customView = GitHubView()
     
     override func loadView() {
-        super.loadView()
         view = customView
         setup()
     }
@@ -82,7 +81,6 @@ final class ViewController: UIViewController {
         
         viewModel.searchText
             .bind { [weak viewModel] query in
-                viewModel?.cancelRequestIfNotCompleted()
                 viewModel?.searchGithubUserIfCan(by: query)
             }
             .disposed(by: disposeBag)
