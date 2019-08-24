@@ -27,6 +27,11 @@ final class ViewModel {
         searchGithubUserIfCan(by: name, pagination: true)
     }
     
+    func getAvataUrl(at indexPath: IndexPath) -> URL? {
+        guard let urlStr = users.value[safe: indexPath.row]?.avatarUrl else { return nil }
+        return URL(string: urlStr)
+    }
+    
     // MARK: Pagination
     
     private var pageInfo: GitHubPageInfoModel?
@@ -44,12 +49,6 @@ final class ViewModel {
         pageInfo = nil
     }
     
-    func getAvataUrl(at indexPath: IndexPath) -> URL? {
-        guard let urlStr = users.value[safe: indexPath.row]?.avatarUrl else { return nil }
-        guard let url = URL(string: urlStr) else { return nil }
-        return url
-    }
-     
     // MARK: API
     private var dataTask: URLSessionDataTask?
     private func searchGithubUserIfCan(by name: String?, pagination: Bool) {
@@ -60,7 +59,7 @@ final class ViewModel {
         searchGithubUser(by: name, pagination: pagination)
     }
     private func searchGithubUser(by name: String, pagination: Bool) {
-        dataTask = GitHubNetworkManager.shared
+        dataTask = API.shared
             .requestUserListByName(name, cursor: endCursor) {
                 [weak self] result in
                 guard let self = self else { return }

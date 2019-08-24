@@ -37,11 +37,9 @@ final class GitHubView: UIView {
     }
     
     // MARK: Setup
-    
     private func setup() {
         setupViews()
     }
-    
     private func setupViews() {
         addSubview(tableView) { make in
             make.edges.equalToSuperview()
