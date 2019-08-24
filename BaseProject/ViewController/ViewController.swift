@@ -15,9 +15,7 @@ final class ViewController: UIViewController {
     private let viewModel = ViewModel()
     
     // MARK: View switching
-    
     private lazy var customView = GitHubView()
-    
     override func loadView() {
         view = customView
         setup()
@@ -89,8 +87,7 @@ final class ViewController: UIViewController {
             .drive(tableView.rx
                 .items(cellIdentifier: "\(GitHubUserCell.self)")) {
                     index, user, cell in
-                    let cell = cell as? GitHubUserCell
-                    cell?.configure(user: user)
+                    (cell as? GitHubUserCell)?.configure(user: user)
             }
             .disposed(by: disposeBag)
         

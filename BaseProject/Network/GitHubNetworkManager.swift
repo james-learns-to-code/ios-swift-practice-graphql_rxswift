@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias API = GitHubNetworkManager
+
 final class GitHubNetworkManager: NetworkManager {
     static let shared = GitHubNetworkManager()
     
