@@ -18,16 +18,19 @@ final class ViewController: UIViewController {
     private lazy var customView = GitHubView()
     override func loadView() {
         view = customView
+    }
+    
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setup()
     }
     
     // MARK: Setup
-    
     private func setup() {
         title = ViewModel.title
         setupRx()
     }
-    
     private let disposeBag = DisposeBag()
     private func setupRx() {
         let searchBar = customView.searchController.searchBar
@@ -37,8 +40,7 @@ final class ViewController: UIViewController {
         // UI
         
         tableView.rx.willDisplayCell.asDriver()
-            .drive(onNext: {
-                cell, indexPath in
+            .drive(onNext: { cell, indexPath in
                 if tableView.isLastRow(with: indexPath) {
                     viewModel.searchMoreGithubUserIfCan(
                         by: searchBar.text)
@@ -84,23 +86,20 @@ final class ViewController: UIViewController {
             .disposed(by: disposeBag)
  
         viewModel.users.asDriver()
-            .drive(tableView.rx
-                .items(cellIdentifier: "\(GitHubUserCell.self)")) {
-                    index, user, cell in
-                    (cell as? GitHubUserCell)?.configure(user: user)
+            .drive(tableView.rx.items(cellIdentifier: "\(GitHubUserCell.self)")
+            ) { index, user, cell in
+                (cell as? GitHubUserCell)?.configure(user: user)
             }
             .disposed(by: disposeBag)
         
         viewModel.error.asDriver(onErrorJustReturn: .undefined)
             .drive(onNext: { [weak self] error in
-                let alert = UIAlertController(
-                    title: "Error",
-                    message: error.localizedDescription,
-                    doneButtonTitle: "OK"
+                guard let vc = self?.presentedViewController else { return }
+                UIAlertController.presentError(
+                    in: vc,
+                    message: error.localizedDescription
                 )
-                self?.presentedViewController?.present(alert, animated: true)
             })
             .disposed(by: disposeBag)
     }
 }
-

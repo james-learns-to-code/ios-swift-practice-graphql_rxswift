@@ -60,8 +60,8 @@ final class ViewModel {
     }
     private func searchGithubUser(by name: String, pagination: Bool) {
         dataTask = API.shared
-            .requestUserListByName(name, cursor: endCursor) {
-                [weak self] result in
+            .requestUserListByName(name, cursor: endCursor
+            ) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let value):

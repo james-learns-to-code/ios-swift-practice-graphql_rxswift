@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct GitHubSearchResultResponseModel: Codable {
+protocol GithubAPIResponseable: Codable {
+    var errors: [GitHubResponseErrorModel]? { get }
+}
+
+struct GitHubSearchResultResponseModel: GithubAPIResponseable {
     let data: GitHubSearchResultModel?
     let errors: [GitHubResponseErrorModel]?
 }

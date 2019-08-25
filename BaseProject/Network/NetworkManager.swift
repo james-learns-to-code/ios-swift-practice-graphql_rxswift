@@ -96,8 +96,10 @@ class NetworkManager {
         task.resume()
         return task
     }
- 
-    // MARK: Decoder
+}
+
+// MARK: Decoder
+extension NetworkManager {
     struct Decoder<Type: Decodable> {
         static func decodeResult(
             _ result: DataResult,
