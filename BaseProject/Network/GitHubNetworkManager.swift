@@ -35,3 +35,25 @@ final class GitHubNetworkManager: NetworkManager {
     
     static let defaultNumOfItem = 20
 }
+
+extension GitHubNetworkManager {
+    struct Handler<Type: GithubAPIResponseable> {
+        static func handleResult(
+            _ result: DataResult,
+            handler: @escaping (Result<Type, NetworkError>) -> Void) {
+            Decoder<Type>
+                .decodeResult(result) { result in
+                    switch result {
+                    case .success(let value):
+                        if let errors = value.errors {
+                            handler(.failure(.githubApi(errors: errors)))
+                            return
+                        }
+                        handler(.success(value))
+                    case .failure(let error):
+                        handler(.failure(error))
+                    }
+            }
+        }
+    }
+}

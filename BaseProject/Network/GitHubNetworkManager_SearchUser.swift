@@ -25,14 +25,10 @@ extension GitHubNetworkManager {
             type: .post,
             header: GitHubNetworkManager.header,
             body: body) { result in
-                Decoder<GitHubSearchResultResponseModel>
-                    .decodeResult(result) { result in
+                Handler<GitHubSearchResultResponseModel>
+                    .handleResult(result) { result in
                         switch result {
-                        case .success(let value):
-                            if let errors = value.errors {
-                                handler(.failure(.githubApi(errors: errors)))
-                                return
-                            }
+                        case .success(let value): 
                             handler(.success(value))
                         case .failure(let error):
                             handler(.failure(error))

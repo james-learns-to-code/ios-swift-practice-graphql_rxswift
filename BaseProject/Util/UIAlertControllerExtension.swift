@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIAlertController {
+    
     convenience init(
         title: String,
         message: String?,
@@ -26,6 +27,22 @@ extension UIAlertController {
             handler: completed
         )
         addAction(action)
+    }
+    
+    static func presentError(
+        in vc: UIViewController,
+        title: String = "Error",
+        message: String?,
+        doneButtonTitle: String = "OK",
+        completed: ((UIAlertAction)-> Void)? = nil
+        ) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            doneButtonTitle: doneButtonTitle,
+            completed: completed
+        )
+        vc.present(alert, animated: true)
     }
 }
 
