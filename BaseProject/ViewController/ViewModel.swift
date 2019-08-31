@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Alamofire
 
 final class ViewModel {
     
@@ -50,7 +51,7 @@ final class ViewModel {
     }
     
     // MARK: API
-    private var dataTask: URLSessionDataTask?
+    private var dataTask: DataRequest?
     private func searchGithubUserIfCan(by name: String?, pagination: Bool) {
         guard let name = name, name.count > 0 else {
             resetData()

@@ -14,6 +14,7 @@ def common_pods
   pod 'Then', '2.5.0'
   pod 'RxSwift', '5.0.0'
   pod 'RxCocoa', '5.0.0'
+  pod 'Alamofire', '4.8.2'
 end
 
 def common_pods_for_test

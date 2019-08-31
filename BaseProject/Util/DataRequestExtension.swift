@@ -6,11 +6,11 @@
 //  Copyright © 2019 Good Effect. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
-extension URLSessionDataTask {
+extension DataRequest {
     func cancelIfNotCompleted() {
-        guard state != .completed else { return }
+        guard let state = task?.state, state != .completed else { return }
         cancel()
     }
 }

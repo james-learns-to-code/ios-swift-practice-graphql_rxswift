@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import Alamofire
  
 extension GitHubNetworkManager {
-    typealias SearchResultResultHandler = (Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
+    typealias SearchResultResultHandler = (Swift.Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
 
     func requestUserListByName(
         _ name: String,
         cursor: String? = nil,
-        handler: @escaping SearchResultResultHandler) -> URLSessionDataTask {
+        handler: @escaping SearchResultResultHandler) -> DataRequest {
         
         let body = QueryReplacer.getSearchUserQueryByReplacing(
             GitHubNetworkManager.searchUserQuery,

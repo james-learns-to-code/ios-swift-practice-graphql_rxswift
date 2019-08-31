@@ -25,19 +25,18 @@ extension GitHubNetworkManager {
 
 extension GitHubNetworkManager.QueryReplacer {
     static func getSearchUserQueryByReplacing(_ query: String, name: String, cursor: String?) -> String {
-        var body = query
+        let body = query
             .replacingOccurrences(of: userName, with: "\"\(name)\"")
             .replacingOccurrences(of: numOfItem, with: "\(GitHubNetworkManager.defaultNumOfItem)")
         
         if let cursor = cursor {
-            body = body
+            return body
                 .replacingOccurrences(of: afterCursor, with: "\"\(cursor)\"")
         } else {
-            body = body
+            return body
                 .replacingOccurrences(of: parameterCursor, with: "")
                 .replacingOccurrences(of: parameterAfterCursor, with: "")
                 .replacingOccurrences(of: variableCursor, with: "")
         }
-        return body
     }
 }
