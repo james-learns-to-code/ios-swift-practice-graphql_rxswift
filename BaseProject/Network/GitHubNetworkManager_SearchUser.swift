@@ -6,25 +6,15 @@
 //  Copyright © 2019 Good Effect. All rights reserved.
 //
 
-import Foundation
+import Alamofire
  
-extension GitHubNetworkManager {
-    typealias SearchResultResultHandler = (Result<GitHubSearchResultResponseModel, NetworkError>) -> Void
-
+extension GitHubNetworkManager { 
+    typealias SearchResultResultHandler = (Swift.Result<GitHubSearchResultResponseModel, GitHubNetworkError>) -> Void
     func requestUserListByName(
         _ name: String,
         cursor: String? = nil,
-        handler: @escaping SearchResultResultHandler) -> URLSessionDataTask {
-        
-        let body = QueryReplacer.getSearchUserQueryByReplacing(
-            GitHubNetworkManager.searchUserQuery,
-            name: name,
-            cursor: cursor)
-        return request(
-            with: GitHubNetworkManager.url,
-            type: .post,
-            header: GitHubNetworkManager.header,
-            body: body) { result in
+        handler: @escaping SearchResultResultHandler) -> DataRequest {
+        return request(Router.search(name: name, cursor: cursor)) { result in
                 Handler<GitHubSearchResultResponseModel>
                     .handleResult(result) { result in
                         switch result {
@@ -38,7 +28,7 @@ extension GitHubNetworkManager {
     }
     
     // MARK: GraphQL Query
-    private static let searchUserQuery =
+    static let searchUserQuery =
     """
 { \
    "query": \
