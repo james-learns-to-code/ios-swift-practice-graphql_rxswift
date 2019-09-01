@@ -90,16 +90,6 @@ final class ViewController: UIViewController {
             ) { index, user, cell in
                 (cell as? GitHubUserCell)?.configure(user: user)
             }
-            .disposed(by: disposeBag)
-        
-        viewModel.error.asDriver(onErrorJustReturn: .undefined)
-            .drive(onNext: { [weak self] error in
-                guard let vc = self?.presentedViewController else { return }
-                UIAlertController.presentError(
-                    in: vc,
-                    message: error.localizedDescription
-                )
-            })
-            .disposed(by: disposeBag)
+            .disposed(by: disposeBag) 
     }
 }

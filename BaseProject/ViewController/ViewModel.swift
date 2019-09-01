@@ -14,13 +14,13 @@ import Alamofire
 final class ViewModel {
     
     let users: BehaviorRelay<[GitHubSearchUserModel]> = .init(value: [])
-    let error = PublishRelay<NetworkError>()
     let searchText = PublishRelay<String>()
 
     // MARK: Interface
     
     func searchGithubUserIfCan(by name: String?) {
-        dataTask?.cancelIfNotCompleted()
+        dataTask?.cancel()
+        resetData()
         searchGithubUserIfCan(by: name, pagination: false)
     }
     func searchMoreGithubUserIfCan(by name: String?) {
@@ -64,6 +64,7 @@ final class ViewModel {
             .requestUserListByName(name, cursor: endCursor
             ) { [weak self] result in
                 guard let self = self else { return }
+                self.dataTask = nil
                 switch result {
                 case .success(let value):
                     self.pageInfo = value.data?.search?.pageInfo
@@ -74,7 +75,7 @@ final class ViewModel {
                     }
                     self.users.accept(users)
                 case .failure(let error):
-                    self.error.accept(error)
+                    print(error)
                 }
         }
     }
