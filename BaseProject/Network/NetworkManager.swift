@@ -12,34 +12,29 @@ enum NetworkError: Error {
     case undefined
     case url
     case response(error: Error?)
-    case data
     case jsonDecoding(error: Error?)
-    case query
-    case githubApi(errors: [GitHubResponseErrorModel]?)
- 
-    static let domain = "app.network"
-    
-    var localizedDescription: String {
-        switch self {
-        case .response(let error):
-            return error?.localizedDescription ?? self.localizedDescription
-        case .jsonDecoding(let error):
-            return error?.localizedDescription ?? self.localizedDescription
-        case .githubApi(let errors):
-            return errors?.first?.message ?? self.localizedDescription
-        default:
-            return self.localizedDescription
-        }
-    }
 }
 
 class NetworkManager {
     
-    typealias HeaderType = [String: String]
+    // MARK: Session
     
-    static let defaultHeader: HeaderType = [
+    static let defaultHeader: HTTPHeaders = [
         "Content-Type": "application/json"
     ]
+    
+    private lazy var sessionManager: SessionManager = {
+        let conf = URLSessionConfiguration.default
+        conf.httpAdditionalHeaders = NetworkManager.defaultHeader
+        return SessionManager(configuration: conf)
+    }()
+
+    func setAdapter(_ adapter: RequestAdapter) {
+        sessionManager.adapter = adapter
+    }
+    func setRetrier(_ retrier: RequestRetrier) {
+        sessionManager.retrier = retrier
+    }
     
     // MARK: Request
     
@@ -48,19 +43,9 @@ class NetworkManager {
     
     @discardableResult
     func request(
-        with url: URL,
-        type: HTTPMethod,
-        header: HeaderType = NetworkManager.defaultHeader,
-        body: String? = nil,
+        _ request: URLRequestConvertible,
         handler: @escaping DataResultHandler) -> DataRequest {
-
-        var req = URLRequest(url: url)
-        req.httpMethod = type.rawValue
-        req.allHTTPHeaderFields = header
-        req.setHttpBodyIfExist(body)
-
-        return Alamofire
-            .request(req)
+        return sessionManager.request(request)
             .responseData(queue: .global(qos: .background)) { response in
                 switch response.result {
                 case .success(let data):
@@ -89,7 +74,6 @@ extension NetworkManager {
                     handler(.failure(.jsonDecoding(error: error)))
                 }
             case .failure(let error):
-                print(error)
                 handler(.failure(error))
             }
         }

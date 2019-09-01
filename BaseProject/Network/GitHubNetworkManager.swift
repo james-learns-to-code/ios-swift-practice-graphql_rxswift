@@ -6,31 +6,19 @@
 //  Copyright © 2019 Good Effect. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
 typealias API = GitHubNetworkManager
 
 final class GitHubNetworkManager: NetworkManager {
     static let shared = GitHubNetworkManager()
     
-    static let url = URL(string: "https://api.github.com/graphql")!
-
-    static let header: HeaderType = [
-        "Content-Type": "application/json",
-        "Authorization": authorization
-    ]
-    
-    private static var authorization: String {
-        return "token " + accessToken
-    }
-    
-    private static var accessToken: String {
-        guard let token = String
-            .getPureStringFromBundle("GitHubAccessToken", ofType: "credential") else {
-            assertionFailure("You need to create 'GitHubAccessToken.credential' file contains token for accessing GitHub API")
-            return ""
-        }
-        return token
+    override init() {
+        super.init()
+        let adaptor = AccessTokenAdapter()
+        let retrier = NetworkRequestRetrier()
+        super.setAdapter(adaptor)
+        super.setRetrier(retrier)
     }
     
     static let defaultNumOfItem = 20
@@ -40,7 +28,7 @@ extension GitHubNetworkManager {
     struct Handler<Type: GithubAPIResponseable> {
         static func handleResult(
             _ result: DataResult,
-            handler: @escaping (Result<Type, NetworkError>) -> Void) {
+            handler: @escaping (Swift.Result<Type, GitHubNetworkError>) -> Void) {
             Decoder<Type>
                 .decodeResult(result) { result in
                     switch result {
@@ -51,7 +39,8 @@ extension GitHubNetworkManager {
                         }
                         handler(.success(value))
                     case .failure(let error):
-                        handler(.failure(error))
+                        let err = GitHubNetworkError.convertError(error)
+                        handler(.failure(err))
                     }
             }
         }
