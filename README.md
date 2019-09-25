@@ -44,3 +44,6 @@ It helps giving me a clear logic and obeying SRP.
 GraphQL Querying is most tricky part to me.  
 The format is strict and there is no easy way to manipulate it.  
 Perhaps 'Apollo-ios' would helps.
+
+# Fastlane
+I add Fastlane for implement CD. Please go to 'fastlane' folder for checkout.
