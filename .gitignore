@@ -38,3 +38,8 @@ GitHubAccessToken.credential
 #
 Pods/
 Podfile.lock
+
+# Fastlane
+Gemfile
+*.cer
+*.mobileprovision
