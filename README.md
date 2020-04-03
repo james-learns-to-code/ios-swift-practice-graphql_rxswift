@@ -21,7 +21,7 @@ For practicing designing real-world networks, i implement complex network manage
 I implement NetworkManager for using request and response handling base level. It has NetworkError dependancy only.
 
 ## API
-For using API request and response handling, I implement GitHubNetworkManager based NetworkManager. It has entity and GitHubNetworkError depadancy.
+For using API request and response handling, I implement GitHubNetworkManager based NetworkManager. It has entity and GitHubNetworkError dependancy.
 
 ## Router
 I use Router for routing url and request options. Router has URLRequestConvertible protol and when request URLRequest Router create URLRequest by following case and return it.
