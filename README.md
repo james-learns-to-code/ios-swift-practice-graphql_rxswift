@@ -30,8 +30,7 @@ I use Router for routing url and request options. Router has URLRequestConvertib
 For injecting GitHub access token i implement RequestAdapter provided Alamofire. When adapt() called, inject aceess token to URLRequest.
 
 ## Retrier
-Provied Alamofire, RequestRetrier helps implement complex retrying logic. When should() called, check the response status and decide to retry or not
-
+Provide by Alamofire, RequestRetrier helps implement complex retrying logic. When should() called, check the response status and decide to retry or not
 
 # Implementation
 For using GraphQL, create "POST" request by putting query in the request body.  
