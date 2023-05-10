@@ -1,7 +1,7 @@
 # Mission
 Develop Github user search app for iOS.
 
-# Condition
+# Specs
 Pagination.  
 Present searched user list.
 
@@ -12,7 +12,7 @@ Use Reactive framework to implement complex search flow.
 # Use of API
 For using Github API, you have to generate access-token.  
 https://github.com/settings/tokens  
-Because of the token is private resource, i stored as a file and include git-ignore list for preventing distribution.
+Because of the token is private resource, i stored as a file and include git-ignore list for preventing leakage.
 
 # Alamofire
 For practicing designing real-world networks, i implement complex network manager using Alamofire.
